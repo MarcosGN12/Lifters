@@ -8,6 +8,10 @@ import { ActivitiesModule } from './resources/activities/activities.module';
 import { ExercisesModule } from './resources/exercises/exercises.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './resources/users/entities/user.entity';
+import { Workout } from './resources/workouts/entities/workout.entity';
+import { TrainingPlan } from './resources/training-plans/entities/training-plan.entity';
+import { Activity } from './resources/activities/entities/activity.entity';
+import { Exercise } from './resources/exercises/entities/exercise.entity';
 
 @Module({
   imports: [
@@ -23,7 +27,7 @@ import { User } from './resources/users/entities/user.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'lifters-dev',
-      entities: [User],
+      entities: [User, TrainingPlan, Workout, Activity, Exercise],
       synchronize: true,
     }),
   ],
