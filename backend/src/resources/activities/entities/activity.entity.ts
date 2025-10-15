@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exercise } from 'src/resources/exercises/entities/exercise.entity';
+import { Workout } from 'src/resources/workouts/entities/workout.entity';
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Activity {
@@ -16,4 +18,10 @@ export class Activity {
 
   @Column('int', { array: true })
   results: number[];
+
+  @ManyToOne(() => Workout, (workout) => workout.workouts)
+  workout: Workout;
+
+  @ManyToMany(() => Exercise, (exercise) => exercise.activity)
+  exercise: Exercise;
 }
