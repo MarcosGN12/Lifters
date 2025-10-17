@@ -20,7 +20,7 @@ export class Exercise {
   @ManyToOne(() => User, (user) => user.exercises)
   user: User;
 
-  @ManyToMany(() => Activity, (activity) => activity.exercise)
+  @ManyToMany(() => Activity)
   @JoinTable()
-  activity: Activity;
+  activity: Activity[];
 }

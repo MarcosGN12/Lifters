@@ -13,6 +13,6 @@ export class User {
   @OneToMany(() => TrainingPlan, (trainingPlan) => trainingPlan.user)
   trainingPlans: TrainingPlan[];
 
-  @OneToMany(() => Exercise, (exercise) => exercise.user) 
-  exercises: Exercise[]
+  @OneToMany(() => Exercise, (exercise) => exercise.user)
+  exercises: Exercise[];
 }
