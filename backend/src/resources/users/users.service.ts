@@ -11,23 +11,44 @@ export class UsersService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(createUserDto: CreateUserDto) {
+    const user = new User();
+    user.email = createUserDto.email;
+    user.trainingPlans = createUserDto.trainingPlans;
+    user.exercises = createUserDto.exercises;
+
+    return await this.userRepository.save(user);;
   }
 
-  findAll(): Promise<User[]> {
+  async findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
 
-  findOne(id: number): Promise<User | null> {
+  async findOne(id: number): Promise<User | null> {
     return this.userRepository.findOneBy({ id });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.userRepository.findOneBy({ id });
+
+    if (!user) {
+      throw new Error('user not found');
+    }
+
+    user.email = updateUserDto.email;
+    user.trainingPlans = updateUserDto.trainingPlans;
+    user.exercises = updateUserDto.exercises;
+
+    return this.userRepository.save(user);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number): Promise<User> {
+    const user = await this.userRepository.findOneBy({ id });
+
+    if (!user) {
+      throw new Error('user not found');
+    }
+
+    return this.userRepository.remove(user);
   }
 }
