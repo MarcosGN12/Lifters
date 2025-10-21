@@ -1,0 +1,26 @@
+services:
+  lifters-dev-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lifters-dev
+    volumes:
+      - dev_db_data:/var/lib/postgresql/data
+    ports:
+      - "5439:5432"
+
+  lifters-pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5053:80"
+    depends_on:
+      - lifters-dev-db
+
+volumes:
+  dev_db_data:
