@@ -35,9 +35,17 @@ export class UsersService {
       throw new Error('user not found');
     }
 
-    user.email = updateUserDto.email;
-    user.trainingPlans = updateUserDto.trainingPlans;
-    user.exercises = updateUserDto.exercises;
+    if(updateUserDto.email){
+      user.email = updateUserDto.email;
+    }
+
+    if(updateUserDto.trainingPlans){
+      user.trainingPlans = updateUserDto.trainingPlans;
+    }
+
+    if(updateUserDto.exercises){
+      user.exercises = updateUserDto.exercises;
+    }
 
     return this.userRepository.save(user);
   }
