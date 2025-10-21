@@ -6,7 +6,9 @@
 
 #### Definición
 
-Una API REST es un patron de diseño o arquitectura, que permite la comunicacion entre ambos mediante peticiones HTTP para realizar operaciones CRUD(create, read, update y delete).
+Una API REST es un patron de diseño arquitectural, que permite la comunicacion con nuestro backend mediante peticiones HTTP para realizar operaciones CRUD sobre los recursos que expone la API.
+
+Los recursos que son elementos que nos interesan ya que podemos identificarlos y manipularlos mediante las operaciones CRUD, que puede ser una entidad tangible como un cliente, producto, etc, tambien podria ser un servicio, una transaccion o un calculo.
 
 - Create: verbo POST, lo utilizaremos para crear recursos en la base de datos.
 
@@ -15,8 +17,6 @@ Una API REST es un patron de diseño o arquitectura, que permite la comunicacion
 - Update: verbo PUT o PATCH, lo utilizaremos para actualizar recursos en la base de datos.
 
 - Delete: verbo DELETE, lo utilizaremos para borrar recursos en la base de datos.
-
-Luego tenemos los recursos que son elementos que nos interesan ya que podemos identificarlos y manipularlos mediante las operaciones CRUD, que puede ser una entidad tangible como un cliente, producto, etc, tambien podria ser un servicio, una transaccion o un calculo.
 
 #### Características
 
@@ -30,7 +30,7 @@ Luego tenemos los recursos que son elementos que nos interesan ya que podemos id
 
 #### Definición
 
-Es una herramienta que nos permite trabajar con bases de datos relacionales utilizando el paradigma de la orientacion a objetos, y para ello nos da metodos que por debajo usan codigo SQL, para que no tengamos que escribirlo nosotros a mano
+Es una herramienta que nos permite trabajar con bases de datos relacionales utilizando el paradigma de la orientacion a objetos, y para ello nos da metodos que por debajo usan codigo SQL, para que no tengamos que escribirlo nosotros a mano.
 
 ### Repository Pattern
 
