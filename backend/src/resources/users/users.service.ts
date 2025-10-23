@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,33 +15,55 @@ export class UsersService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const duplicatedEmail = await this.userRepository.findOneBy(createUserDto);
+
+    if (duplicatedEmail) {
+      console.log(createUserDto);
+      throw new ConflictException('This email has been already registered');
+    }
+
     const user = new User();
     user.email = createUserDto.email;
-    user.trainingPlans = createUserDto.trainingPlans;
-    user.exercises = createUserDto.exercises;
 
-    return await this.userRepository.save(user);;
+    return await this.userRepository.save(user);
   }
 
   async findAll(): Promise<User[]> {
-    return this.userRepository.find();
+    const users = await this.userRepository.find();
+
+    if (users.length == 0) {
+      throw new NotFoundException('Users not found');
+    }
+
+    return users;
   }
 
   async findOne(id: number): Promise<User | null> {
-    return this.userRepository.findOneBy({ id });
+    const user = await this.userRepository.findOneBy({ id });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    return user;
   }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findOneBy({ id });
+    const duplicatedEmail = await this.userRepository.findOneBy(updateUserDto);
 
     if (!user) {
-      throw new Error('user not found');
+      throw new NotFoundException('User not found');
     }
 
-    user.email = updateUserDto.email;
-    user.trainingPlans = updateUserDto.trainingPlans;
-    user.exercises = updateUserDto.exercises;
+    if (duplicatedEmail) {
+      throw new ConflictException('Email already registered for other user');
+    }
+
+    if (updateUserDto.email) {
+      user.email = updateUserDto.email;
+    }
 
     return this.userRepository.save(user);
   }
@@ -46,7 +72,7 @@ export class UsersService {
     const user = await this.userRepository.findOneBy({ id });
 
     if (!user) {
-      throw new Error('user not found');
+      throw new NotFoundException('User not found');
     }
 
     return this.userRepository.remove(user);
