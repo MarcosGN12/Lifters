@@ -16,9 +16,10 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const duplicatedEmail = await this.findOneByEmail(createUserDto.email);
+    const duplicatedEmail = await this.userRepository.findOneBy(createUserDto);
 
     if (duplicatedEmail) {
+      console.log(createUserDto);
       throw new ConflictException('This email has been already registered');
     }
 
@@ -48,13 +49,9 @@ export class UsersService {
     return user;
   }
 
-  async update(
-    id: number,
-    updateUserDto: UpdateUserDto,
-    createUserDto: CreateUserDto,
-  ): Promise<User> {
-    const duplicatedEmail = await this.findOneByEmail(createUserDto.email);
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findOneBy({ id });
+    const duplicatedEmail = await this.userRepository.findOneBy(updateUserDto);
 
     if (!user) {
       throw new NotFoundException('User not found');
@@ -79,9 +76,5 @@ export class UsersService {
     }
 
     return this.userRepository.remove(user);
-  }
-
-  private async findOneByEmail(email: string): Promise<User | null> {
-    return await this.userRepository.findOneBy({ email });
   }
 }

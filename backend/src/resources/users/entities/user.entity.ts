@@ -1,6 +1,6 @@
-import { Exercise } from 'src/resources/exercises/entities/exercise.entity';
-import { TrainingPlan } from 'src/resources/training-plans/entities/training-plan.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { TrainingPlan } from '../../training-plans/entities/training-plan.entity';
+import { Exercise } from '../../exercises/entities/exercise.entity';
 
 @Entity()
 export class User {
