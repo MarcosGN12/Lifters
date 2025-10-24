@@ -19,7 +19,6 @@ export class UsersService {
     const duplicatedEmail = await this.userRepository.findOneBy(createUserDto);
 
     if (duplicatedEmail) {
-      console.log(createUserDto);
       throw new ConflictException('This email has been already registered');
     }
 

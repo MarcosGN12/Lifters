@@ -8,8 +8,9 @@ import { TrainingPlan } from './entities/training-plan.entity';
 @Injectable()
 export class TrainingPlanService {
   constructor(
-      @InjectRepository(TrainingPlan) private trainingPlanRepository: Repository<TrainingPlan>,
-    ) {}
+    @InjectRepository(TrainingPlan)
+    private trainingPlanRepository: Repository<TrainingPlan>,
+  ) {}
 
   create(createTrainingPlanDto: CreateTrainingPlanDto) {
     return 'This action adds a new trainingPlan';

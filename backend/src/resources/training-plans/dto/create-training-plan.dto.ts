@@ -1,1 +1,3 @@
-export class CreateTrainingPlanDto {}
+export class CreateTrainingPlanDto {
+  name: string;
+}
