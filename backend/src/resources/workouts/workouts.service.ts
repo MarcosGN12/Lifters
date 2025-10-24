@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateWorkoutDto } from './dto/create-workout.dto';
 import { UpdateWorkoutDto } from './dto/update-workout.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,23 +11,57 @@ export class WorkoutsService {
     @InjectRepository(Workout) private workRepository: Repository<Workout>,
   ) {}
 
-  create(createWorkoutDto: CreateWorkoutDto) {
-    return 'This action adds a new workout';
+  async create(createWorkoutDto: CreateWorkoutDto): Promise<Workout> {
+    const workout = new Workout();
+    workout.weekNumber = createWorkoutDto.weekNumber;
+
+    return await this.workRepository.save(workout);
   }
 
-  findAll(): Promise<Workout[]>{
-    return this.workRepository.find();
+  async findAll(): Promise<Workout[]> {
+    const workouts = await this.workRepository.find();
+
+    if (workouts.length == 0) {
+      throw new NotFoundException('Workouts not found');
+    }
+
+    return workouts;
   }
 
-  findOne(id: number): Promise<Workout | null> {
-    return this.workRepository.findOneBy({ id });
+  async findOne(id: number): Promise<Workout | null> {
+    const workout = await this.workRepository.findOneBy({ id });
+
+    if (!workout) {
+      throw new NotFoundException('Workout not found');
+    }
+
+    return workout;
   }
 
-  update(id: number, updateWorkoutDto: UpdateWorkoutDto) {
-    return `This action updates a #${id} workout`;
+  async update(
+    id: number,
+    updateWorkoutDto: UpdateWorkoutDto,
+  ): Promise<Workout> {
+    const workout = await this.workRepository.findOneBy(updateWorkoutDto);
+
+    if (!workout) {
+      throw new NotFoundException('Workout not found');
+    }
+
+    if (updateWorkoutDto.weekNumber) {
+      workout.weekNumber = updateWorkoutDto.weekNumber;
+    }
+
+    return this.workRepository.save(workout);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} workout`;
+  async remove(id: number): Promise<Workout> {
+    const workout = await this.workRepository.findOneBy({ id });
+
+    if (!workout) {
+      throw new NotFoundException('Workout not found');
+    }
+
+    return this.workRepository.remove(workout);
   }
 }

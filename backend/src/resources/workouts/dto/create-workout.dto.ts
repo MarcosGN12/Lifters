@@ -1,1 +1,3 @@
-export class CreateWorkoutDto {}
+export class CreateWorkoutDto {
+  weekNumber: number;
+}
