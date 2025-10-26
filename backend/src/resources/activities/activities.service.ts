@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,26 +8,72 @@ import { Activity } from './entities/activity.entity';
 @Injectable()
 export class ActivitiesService {
   constructor(
-      @InjectRepository(Activity) private activityRepository: Repository<Activity>,
+    @InjectRepository(Activity)
+    private activityRepository: Repository<Activity>,
   ) {}
 
-  create(createActivityDto: CreateActivityDto) {
-    return 'This action adds a new activity';
+  async create(createActivityDto: CreateActivityDto): Promise<Activity> {
+    const activity = new Activity();
+    activity.sets = createActivityDto.sets;
+    activity.reps = createActivityDto.reps;
+    activity.weight = createActivityDto.weight;
+    activity.results = createActivityDto.results;
+
+    return await this.activityRepository.save(activity);
   }
 
-  findAll(): Promise<Activity[]> {
-    return this.activityRepository.find();
+  async findAll(): Promise<Activity[]> {
+    const activities = await this.activityRepository.find();
+
+    if (activities.length == 0) {
+      throw new NotFoundException('Activities not found');
+    }
+
+    return activities;
   }
 
-  findOne(id: number): Promise<Activity | null> {
-    return this.activityRepository.findOneBy({ id })
+  async findOne(id: number): Promise<Activity | null> {
+    const activity = await this.activityRepository.findOneBy({ id });
+
+    if (!activity) {
+      throw new NotFoundException('Activity not found');
+    }
+
+    return activity;
   }
 
-  update(id: number, updateActivityDto: UpdateActivityDto) {
-    return `This action updates a #${id} activity`;
+  async update(
+    id: number,
+    updateActivityDto: UpdateActivityDto,
+  ): Promise<Activity> {
+    const activity = await this.activityRepository.findOneBy({ id });
+
+    if (!activity) {
+      throw new NotFoundException('Activity not found');
+    }
+
+    if (updateActivityDto.sets) {
+      activity.sets = updateActivityDto.sets;
+    }
+
+    if (updateActivityDto.reps) {
+      activity.reps = updateActivityDto.reps;
+    }
+
+    if (updateActivityDto.weight) {
+      activity.weight = updateActivityDto.weight;
+    }
+
+    return this.activityRepository.save(activity);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} activity`;
+  async remove(id: number): Promise<Activity> {
+    const activity = await this.activityRepository.findOneBy({ id });
+
+    if (!activity) {
+      throw new NotFoundException('Activity not found');
+    }
+
+    return this.activityRepository.remove(activity);
   }
 }

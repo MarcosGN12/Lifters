@@ -79,6 +79,7 @@ export class ExercisesService {
     if (!exercise) {
       throw new NotFoundException('Exercise not found');
     }
+
     return this.exerciseRepository.remove(exercise);
   }
 }

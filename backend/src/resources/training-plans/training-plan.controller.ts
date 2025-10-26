@@ -12,7 +12,7 @@ import { CreateTrainingPlanDto } from './dto/create-training-plan.dto';
 import { UpdateTrainingPlanDto } from './dto/update-training-plan.dto';
 import { TrainingPlan } from './entities/training-plan.entity';
 
-@Controller('training-plan')
+@Controller('training-plans')
 export class TrainingPlanController {
   constructor(private readonly trainingPlanService: TrainingPlanService) {}
 

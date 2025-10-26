@@ -3,6 +3,7 @@ import { Workout } from 'src/resources/workouts/entities/workout.entity';
 import {
   Column,
   Entity,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -29,5 +30,6 @@ export class Activity {
   workout: Workout;
 
   @ManyToMany(() => Exercise)
+  @JoinTable()
   exercise: Exercise[];
 }
