@@ -1,8 +1,15 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 import { TrainingPlan } from '../../training-plans/entities/training-plan.entity';
 import { Exercise } from '../../exercises/entities/exercise.entity';
 
 @Entity()
+@Unique(['email'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;

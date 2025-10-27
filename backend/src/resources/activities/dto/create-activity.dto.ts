@@ -3,4 +3,6 @@ export class CreateActivityDto {
   reps: number;
   weight: number;
   results: number[];
+  workoutId: number;
+  exerciseId: number;
 }

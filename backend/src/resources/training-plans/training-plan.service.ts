@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -29,6 +30,13 @@ export class TrainingPlanService {
 
     const trainingPlan = new TrainingPlan();
     trainingPlan.name = createTrainingPlanDto.name;
+    trainingPlan.userId = createTrainingPlanDto.userId;
+
+    if (!trainingPlan.userId) {
+      throw new BadRequestException(
+        'There is not any user assigned to this training plan',
+      );
+    }
 
     return await this.trainingPlanRepository.save(trainingPlan);
   }

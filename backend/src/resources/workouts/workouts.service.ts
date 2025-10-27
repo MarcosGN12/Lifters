@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateWorkoutDto } from './dto/create-workout.dto';
 import { UpdateWorkoutDto } from './dto/update-workout.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -14,6 +18,13 @@ export class WorkoutsService {
   async create(createWorkoutDto: CreateWorkoutDto): Promise<Workout> {
     const workout = new Workout();
     workout.weekNumber = createWorkoutDto.weekNumber;
+    workout.trainingPlanId = createWorkoutDto.trainingPlanId;
+
+    if (!workout.trainingPlanId) {
+      throw new BadRequestException(
+        'There is not any training plan assigned to this workout',
+      );
+    }
 
     return await this.workRepository.save(workout);
   }

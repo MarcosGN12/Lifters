@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -26,6 +27,13 @@ export class ExercisesService {
 
     const exercise = new Exercise();
     exercise.name = createExerciseDto.name;
+    exercise.userId = createExerciseDto.userId;
+
+    if (!exercise.userId) {
+      throw new BadRequestException(
+        'There is not any user assigned to this exercise',
+      );
+    }
 
     return await this.exerciseRepository.save(exercise);
   }

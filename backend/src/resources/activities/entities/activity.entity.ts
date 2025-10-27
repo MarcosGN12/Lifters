@@ -23,6 +23,12 @@ export class Activity {
   @Column()
   weight: number;
 
+  @Column()
+  workoutId: number;
+
+  @Column()
+  exerciseId: number;
+
   @Column('int', { array: true })
   results: number[];
 

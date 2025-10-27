@@ -6,15 +6,20 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 
 @Entity()
+@Unique(['name'])
 export class TrainingPlan {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   name: string;
+
+  @Column()
+  userId: number;
 
   @ManyToOne(() => User, (user) => user.trainingPlans)
   user: User;

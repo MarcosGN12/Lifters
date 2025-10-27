@@ -16,6 +16,9 @@ export class Workout {
   @Column()
   weekNumber: number;
 
+  @Column()
+  trainingPlanId: number;
+
   @ManyToOne(() => TrainingPlan, (trainingPlan) => trainingPlan.workouts)
   trainingPlan: TrainingPlan;
 
