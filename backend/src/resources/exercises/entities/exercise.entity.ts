@@ -1,14 +1,7 @@
 import { User } from 'src/resources/users/entities/user.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  Unique,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-@Unique(['name'])
 export class Exercise {
   @PrimaryGeneratedColumn()
   id: number;
@@ -19,6 +12,8 @@ export class Exercise {
   @Column()
   userId: number;
 
-  @ManyToOne(() => User, (user) => user.exercises)
+  @ManyToOne(() => User, (user) => user.exercises, {
+    onDelete: 'CASCADE',
+  })
   user: User;
 }

@@ -32,7 +32,9 @@ export class Activity {
   @Column('int', { array: true })
   results: number[];
 
-  @ManyToOne(() => Workout, (workout) => workout.activity)
+  @ManyToOne(() => Workout, (workout) => workout.activity, {
+    onDelete: 'CASCADE',
+  })
   workout: Workout;
 
   @ManyToMany(() => Exercise)

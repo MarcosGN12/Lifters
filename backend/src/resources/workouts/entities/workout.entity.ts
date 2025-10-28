@@ -19,7 +19,9 @@ export class Workout {
   @Column()
   trainingPlanId: number;
 
-  @ManyToOne(() => TrainingPlan, (trainingPlan) => trainingPlan.workouts)
+  @ManyToOne(() => TrainingPlan, (trainingPlan) => trainingPlan.workouts, {
+    onDelete: 'CASCADE',
+  })
   trainingPlan: TrainingPlan;
 
   @OneToMany(() => Activity, (activity) => activity.workout)

@@ -6,11 +6,9 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  Unique,
 } from 'typeorm';
 
 @Entity()
-@Unique(['name'])
 export class TrainingPlan {
   @PrimaryGeneratedColumn()
   id: number;
@@ -21,7 +19,9 @@ export class TrainingPlan {
   @Column()
   userId: number;
 
-  @ManyToOne(() => User, (user) => user.trainingPlans)
+  @ManyToOne(() => User, (user) => user.trainingPlans, {
+    onDelete: 'CASCADE',
+  })
   user: User;
 
   @OneToMany(() => Workout, (workout) => workout.trainingPlan)
