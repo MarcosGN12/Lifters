@@ -18,6 +18,7 @@ import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  // vaciar los parametros de los metodos y meterlos en objetos externos en una carpeta swagger
   @Post()
   @ApiOperation({
     description: 'Create an user',

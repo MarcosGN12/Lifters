@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateWorkoutDto } from './dto/create-workout.dto';
 import { UpdateWorkoutDto } from './dto/update-workout.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,19 +7,13 @@ import { Workout } from './entities/workout.entity';
 
 @Injectable()
 export class WorkoutsService {
-  constructor(
-    @InjectRepository(Workout) private workRepository: Repository<Workout>,
-  ) {}
+  constructor(@InjectRepository(Workout) private workRepository: Repository<Workout>) {}
 
   async create(createWorkoutDto: CreateWorkoutDto): Promise<Workout> {
-    const workout = new Workout();
-    workout.weekNumber = createWorkoutDto.weekNumber;
-    workout.trainingPlanId = createWorkoutDto.trainingPlanId;
+    const workout = this.createWorkout(createWorkoutDto);
 
     if (!workout.trainingPlanId) {
-      throw new BadRequestException(
-        'There is not any training plan assigned to this workout',
-      );
+      throw new BadRequestException('There is not any training plan assigned to this workout');
     }
 
     return await this.workRepository.save(workout);
@@ -49,18 +39,15 @@ export class WorkoutsService {
     return workout;
   }
 
-  async update(
-    id: number,
-    updateWorkoutDto: UpdateWorkoutDto,
-  ): Promise<Workout> {
-    const workout = await this.workRepository.findOneBy(updateWorkoutDto);
+  async update(id: number, updateWorkoutDto: UpdateWorkoutDto): Promise<Workout> {
+    const workout = await this.workRepository.findOneBy({ id });
 
     if (!workout) {
       throw new NotFoundException('Workout not found');
     }
 
-    if (updateWorkoutDto.weekNumber) {
-      workout.weekNumber = updateWorkoutDto.weekNumber;
+    if (updateWorkoutDto.plannedAt) {
+      workout.planedAt = updateWorkoutDto.plannedAt;
     }
 
     return this.workRepository.save(workout);
@@ -74,5 +61,12 @@ export class WorkoutsService {
     }
 
     return this.workRepository.remove(workout);
+  }
+
+  private createWorkout(createWorkoutDto: CreateWorkoutDto): Workout {
+    const workout = new Workout();
+    workout.trainingPlanId = createWorkoutDto.trainingPlanId;
+
+    return workout;
   }
 }

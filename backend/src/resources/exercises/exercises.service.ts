@@ -1,9 +1,4 @@
-import {
-  BadRequestException,
-  ConflictException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { UpdateExerciseDto } from './dto/update-exercise.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -18,21 +13,16 @@ export class ExercisesService {
   ) {}
 
   async create(createExerciseDto: CreateExerciseDto): Promise<Exercise> {
-    const duplicatedName =
-      await this.exerciseRepository.findOneBy(createExerciseDto);
+    const duplicatedName = await this.exerciseRepository.findOneBy({ name: createExerciseDto.name });
 
     if (duplicatedName) {
-      throw new ConflictException('This exercise is already created');
+      throw new ConflictException('This exercise is already created for this user');
     }
 
-    const exercise = new Exercise();
-    exercise.name = createExerciseDto.name;
-    exercise.userId = createExerciseDto.userId;
+    const exercise = this.createExercise(createExerciseDto);
 
     if (!exercise.userId) {
-      throw new BadRequestException(
-        'There is not any user assigned to this exercise',
-      );
+      throw new BadRequestException('There is not any user assigned to this exercise');
     }
 
     return await this.exerciseRepository.save(exercise);
@@ -58,17 +48,14 @@ export class ExercisesService {
     return exercise;
   }
 
-  async update(
-    id: number,
-    updateExerciseDto: UpdateExerciseDto,
-  ): Promise<Exercise> {
+  async update(id: number, updateExerciseDto: UpdateExerciseDto): Promise<Exercise> {
     const exercise = await this.exerciseRepository.findOneBy({ id });
-    const duplicatedName =
-      await this.exerciseRepository.findOneBy(updateExerciseDto);
 
     if (!exercise) {
       throw new NotFoundException('Exercise not found');
     }
+
+    const duplicatedName = await this.exerciseRepository.findOneBy({ name: updateExerciseDto.name });
 
     if (duplicatedName) {
       throw new ConflictException('Exercise already created');
@@ -89,5 +76,13 @@ export class ExercisesService {
     }
 
     return this.exerciseRepository.remove(exercise);
+  }
+
+  private createExercise(createExerciseDto: CreateExerciseDto): Exercise {
+    const exercise = new Exercise();
+    exercise.name = createExerciseDto.name;
+    exercise.userId = createExerciseDto.userId;
+
+    return exercise;
   }
 }

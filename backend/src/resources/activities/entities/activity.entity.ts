@@ -1,13 +1,6 @@
 import { Exercise } from 'src/resources/exercises/entities/exercise.entity';
 import { Workout } from 'src/resources/workouts/entities/workout.entity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Activity {

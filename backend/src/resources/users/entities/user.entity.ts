@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  Unique,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { TrainingPlan } from '../../training-plans/entities/training-plan.entity';
 import { Exercise } from '../../exercises/entities/exercise.entity';
 

@@ -1,20 +1,14 @@
-import { Activity } from 'src/resources/activities/entities/activity.entity';
-import { TrainingPlan } from 'src/resources/training-plans/entities/training-plan.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { TrainingPlan } from '../../training-plans/entities/training-plan.entity';
+import { Activity } from '../../activities/entities/activity.entity';
 
 @Entity()
 export class Workout {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  weekNumber: number;
+  @CreateDateColumn()
+  planedAt: Date;
 
   @Column()
   trainingPlanId: number;

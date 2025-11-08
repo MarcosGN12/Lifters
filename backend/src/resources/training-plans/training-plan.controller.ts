@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { TrainingPlanService } from './training-plan.service';
 import { CreateTrainingPlanDto } from './dto/create-training-plan.dto';
 import { UpdateTrainingPlanDto } from './dto/update-training-plan.dto';
@@ -17,9 +9,7 @@ export class TrainingPlanController {
   constructor(private readonly trainingPlanService: TrainingPlanService) {}
 
   @Post()
-  create(
-    @Body() createTrainingPlanDto: CreateTrainingPlanDto,
-  ): Promise<TrainingPlan> {
+  create(@Body() createTrainingPlanDto: CreateTrainingPlanDto): Promise<TrainingPlan> {
     return this.trainingPlanService.create(createTrainingPlanDto);
   }
 
@@ -34,10 +24,7 @@ export class TrainingPlanController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateTrainingPlanDto: UpdateTrainingPlanDto,
-  ): Promise<TrainingPlan> {
+  update(@Param('id') id: string, @Body() updateTrainingPlanDto: UpdateTrainingPlanDto): Promise<TrainingPlan> {
     return this.trainingPlanService.update(+id, updateTrainingPlanDto);
   }
 
