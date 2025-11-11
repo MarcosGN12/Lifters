@@ -13,7 +13,7 @@ export class ExercisesService {
   ) {}
 
   async create(createExerciseDto: CreateExerciseDto): Promise<Exercise> {
-    const duplicatedName = await this.exerciseRepository.findOneBy({ name: createExerciseDto.name });
+    const duplicatedName = await this.exerciseRepository.findOneBy({ name: createExerciseDto.name, userId: createExerciseDto.userId });
 
     if (duplicatedName) {
       throw new ConflictException('This exercise is already created for this user');

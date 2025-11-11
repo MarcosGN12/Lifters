@@ -47,7 +47,7 @@ export class WorkoutsService {
     }
 
     if (updateWorkoutDto.plannedAt) {
-      workout.planedAt = updateWorkoutDto.plannedAt;
+      workout.plannedAt = updateWorkoutDto.plannedAt;
     }
 
     return this.workRepository.save(workout);
@@ -66,6 +66,7 @@ export class WorkoutsService {
   private createWorkout(createWorkoutDto: CreateWorkoutDto): Workout {
     const workout = new Workout();
     workout.trainingPlanId = createWorkoutDto.trainingPlanId;
+    workout.plannedAt = createWorkoutDto.plannedAt;
 
     return workout;
   }

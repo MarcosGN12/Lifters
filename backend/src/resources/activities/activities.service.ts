@@ -22,6 +22,7 @@ export class ActivitiesService {
     if (!activity.exerciseId) {
       throw new BadRequestException('There is not any exercise assigned to this activity');
     }
+
     return await this.activityRepository.save(activity);
   }
 
