@@ -4,12 +4,18 @@ import { UpdateActivityDto } from './dto/update-activity.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Activity } from './entities/activity.entity';
+import { Workout } from '../workouts/entities/workout.entity';
+import { Exercise } from '../exercises/entities/exercise.entity';
 
 @Injectable()
 export class ActivitiesService {
   constructor(
     @InjectRepository(Activity)
     private activityRepository: Repository<Activity>,
+    @InjectRepository(Workout)
+    private workoutRepository: Repository<Workout>,
+    @InjectRepository(Exercise)
+    private exerciseRepository: Repository<Exercise>,
   ) {}
 
   async create(createActivityDto: CreateActivityDto): Promise<Activity> {
@@ -23,6 +29,17 @@ export class ActivitiesService {
       throw new BadRequestException('There is not any exercise assigned to this activity');
     }
 
+    const existExerciseId = await this.exerciseRepository.findOneBy({ id: createActivityDto.exerciseId });
+
+    if (!existExerciseId) {
+      throw new NotFoundException('This exerciseId dont exist');
+    }
+
+    const existWorkoutId = await this.workoutRepository.findOneBy({ id: createActivityDto.workoutId });
+
+    if (!existWorkoutId) {
+      throw new NotFoundException('This workoutId dont exist');
+    }
     return await this.activityRepository.save(activity);
   }
 

@@ -4,12 +4,15 @@ import { UpdateExerciseDto } from './dto/update-exercise.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Exercise } from './entities/exercise.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class ExercisesService {
   constructor(
     @InjectRepository(Exercise)
     private exerciseRepository: Repository<Exercise>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
   async create(createExerciseDto: CreateExerciseDto): Promise<Exercise> {
@@ -23,6 +26,12 @@ export class ExercisesService {
 
     if (!exercise.userId) {
       throw new BadRequestException('There is not any user assigned to this exercise');
+    }
+
+    const existUserId = await this.userRepository.findOneBy({ id: createExerciseDto.userId });
+
+    if (!existUserId) {
+      throw new NotFoundException('This userId dont exist');
     }
 
     return await this.exerciseRepository.save(exercise);

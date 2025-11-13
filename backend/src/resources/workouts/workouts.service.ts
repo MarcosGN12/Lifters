@@ -4,10 +4,16 @@ import { UpdateWorkoutDto } from './dto/update-workout.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Workout } from './entities/workout.entity';
+import { TrainingPlan } from '../training-plans/entities/training-plan.entity';
 
 @Injectable()
 export class WorkoutsService {
-  constructor(@InjectRepository(Workout) private workRepository: Repository<Workout>) {}
+  constructor(
+    @InjectRepository(Workout)
+    private workoutRepository: Repository<Workout>,
+    @InjectRepository(TrainingPlan)
+    private trainingPlanRepository: Repository<TrainingPlan>,
+  ) {}
 
   async create(createWorkoutDto: CreateWorkoutDto): Promise<Workout> {
     const workout = this.createWorkout(createWorkoutDto);
@@ -16,11 +22,17 @@ export class WorkoutsService {
       throw new BadRequestException('There is not any training plan assigned to this workout');
     }
 
-    return await this.workRepository.save(workout);
+    const existTrainingPlanId = await this.trainingPlanRepository.findOneBy({ id: createWorkoutDto.trainingPlanId });
+
+    if (!existTrainingPlanId) {
+      throw new NotFoundException('This trainingPlanId dont exist');
+    }
+
+    return await this.workoutRepository.save(workout);
   }
 
   async findAll(): Promise<Workout[]> {
-    const workouts = await this.workRepository.find();
+    const workouts = await this.workoutRepository.find();
 
     if (workouts.length == 0) {
       throw new NotFoundException('Workouts not found');
@@ -30,7 +42,7 @@ export class WorkoutsService {
   }
 
   async findOne(id: number): Promise<Workout | null> {
-    const workout = await this.workRepository.findOneBy({ id });
+    const workout = await this.workoutRepository.findOneBy({ id });
 
     if (!workout) {
       throw new NotFoundException('Workout not found');
@@ -40,7 +52,7 @@ export class WorkoutsService {
   }
 
   async update(id: number, updateWorkoutDto: UpdateWorkoutDto): Promise<Workout> {
-    const workout = await this.workRepository.findOneBy({ id });
+    const workout = await this.workoutRepository.findOneBy({ id });
 
     if (!workout) {
       throw new NotFoundException('Workout not found');
@@ -50,17 +62,17 @@ export class WorkoutsService {
       workout.plannedAt = updateWorkoutDto.plannedAt;
     }
 
-    return this.workRepository.save(workout);
+    return this.workoutRepository.save(workout);
   }
 
   async remove(id: number): Promise<Workout> {
-    const workout = await this.workRepository.findOneBy({ id });
+    const workout = await this.workoutRepository.findOneBy({ id });
 
     if (!workout) {
       throw new NotFoundException('Workout not found');
     }
 
-    return this.workRepository.remove(workout);
+    return this.workoutRepository.remove(workout);
   }
 
   private createWorkout(createWorkoutDto: CreateWorkoutDto): Workout {
