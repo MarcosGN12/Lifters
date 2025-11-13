@@ -1,33 +1,93 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTrainingPlanDto } from './dto/create-training-plan.dto';
 import { UpdateTrainingPlanDto } from './dto/update-training-plan.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TrainingPlan } from './entities/training-plan.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class TrainingPlanService {
   constructor(
-      @InjectRepository(TrainingPlan) private trainingPlanRepository: Repository<TrainingPlan>,
-    ) {}
+    @InjectRepository(TrainingPlan)
+    private trainingPlanRepository: Repository<TrainingPlan>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
 
-  create(createTrainingPlanDto: CreateTrainingPlanDto) {
-    return 'This action adds a new trainingPlan';
+  async create(createTrainingPlanDto: CreateTrainingPlanDto): Promise<TrainingPlan> {
+    const duplicatedName = await this.trainingPlanRepository.findOneBy({ name: createTrainingPlanDto.name });
+
+    if (duplicatedName) {
+      throw new ConflictException('This training plan is already created');
+    }
+
+    const existUserId = await this.userRepository.findOneBy({ id: createTrainingPlanDto.userId });
+
+    if (!existUserId) {
+      throw new NotFoundException('This userId dont exist');
+    }
+
+    const trainingPlan = this.createTrainingPlan(createTrainingPlanDto);
+
+    return await this.trainingPlanRepository.save(trainingPlan);
   }
 
-  findAll(): Promise<TrainingPlan[]> {
-    return this.trainingPlanRepository.find();
+  async findAll(): Promise<TrainingPlan[]> {
+    const trainingPlans = await this.trainingPlanRepository.find();
+
+    if (trainingPlans.length == 0) {
+      throw new NotFoundException('Training plans not found');
+    }
+
+    return trainingPlans;
   }
 
-  findOne(id: number): Promise<TrainingPlan | null> {
-    return this.trainingPlanRepository.findOneBy({ id });
+  async findOne(id: number): Promise<TrainingPlan | null> {
+    const trainingPlan = await this.trainingPlanRepository.findOneBy({ id });
+
+    if (!trainingPlan) {
+      throw new NotFoundException('Training plan not found');
+    }
+
+    return trainingPlan;
   }
 
-  update(id: number, updateTrainingPlanDto: UpdateTrainingPlanDto) {
-    return `This action updates a #${id} trainingPlan`;
+  async update(id: number, updateTrainingPlanDto: UpdateTrainingPlanDto): Promise<TrainingPlan> {
+    const trainingPlan = await this.trainingPlanRepository.findOneBy({ id });
+
+    if (!trainingPlan) {
+      throw new NotFoundException('Training plan not found');
+    }
+
+    const duplicatedName = await this.trainingPlanRepository.findOneBy({ name: updateTrainingPlanDto.name });
+
+    if (duplicatedName) {
+      throw new ConflictException('Training plan already created');
+    }
+
+    if (updateTrainingPlanDto.name) {
+      trainingPlan.name = updateTrainingPlanDto.name;
+    }
+
+    return this.trainingPlanRepository.save(trainingPlan);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} trainingPlan`;
+  async remove(id: number): Promise<TrainingPlan> {
+    const trainingPlan = await this.trainingPlanRepository.findOneBy({ id });
+
+    if (!trainingPlan) {
+      throw new NotFoundException('Training plan not found');
+    }
+
+    return this.trainingPlanRepository.remove(trainingPlan);
+  }
+
+  private createTrainingPlan(createTrainingPlanDto: CreateTrainingPlanDto): TrainingPlan {
+    const trainingPlan = new TrainingPlan();
+    trainingPlan.name = createTrainingPlanDto.name;
+    trainingPlan.userId = createTrainingPlanDto.userId;
+
+    return trainingPlan;
   }
 }

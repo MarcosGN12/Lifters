@@ -3,9 +3,10 @@ import { TrainingPlanService } from './training-plan.service';
 import { TrainingPlanController } from './training-plan.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TrainingPlan } from './entities/training-plan.entity';
+import { User } from '../users/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TrainingPlan])],
+  imports: [TypeOrmModule.forFeature([TrainingPlan, User])],
   controllers: [TrainingPlanController],
   providers: [TrainingPlanService],
 })

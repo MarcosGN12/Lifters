@@ -10,9 +10,14 @@ export class TrainingPlan {
   @Column()
   name: string;
 
-  @ManyToOne(() => User, (user) => user.trainingPlans)
+  @Column()
+  userId: number;
+
+  @ManyToOne(() => User, (user) => user.trainingPlans, {
+    onDelete: 'CASCADE',
+  })
   user: User;
 
-  @OneToMany(() => Workout, (workout) => workout.trainingPlan) 
-    workouts: Workout[]
+  @OneToMany(() => Workout, (workout) => workout.trainingPlan)
+  workouts: Workout[];
 }

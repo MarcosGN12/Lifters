@@ -2,33 +2,34 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TrainingPlanService } from './training-plan.service';
 import { CreateTrainingPlanDto } from './dto/create-training-plan.dto';
 import { UpdateTrainingPlanDto } from './dto/update-training-plan.dto';
+import { TrainingPlan } from './entities/training-plan.entity';
 
-@Controller('training-plan')
+@Controller('training-plans')
 export class TrainingPlanController {
   constructor(private readonly trainingPlanService: TrainingPlanService) {}
 
   @Post()
-  create(@Body() createTrainingPlanDto: CreateTrainingPlanDto) {
+  create(@Body() createTrainingPlanDto: CreateTrainingPlanDto): Promise<TrainingPlan> {
     return this.trainingPlanService.create(createTrainingPlanDto);
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<TrainingPlan[]> {
     return this.trainingPlanService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<TrainingPlan | null> {
     return this.trainingPlanService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTrainingPlanDto: UpdateTrainingPlanDto) {
+  update(@Param('id') id: string, @Body() updateTrainingPlanDto: UpdateTrainingPlanDto): Promise<TrainingPlan> {
     return this.trainingPlanService.update(+id, updateTrainingPlanDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<TrainingPlan> {
     return this.trainingPlanService.remove(+id);
   }
 }

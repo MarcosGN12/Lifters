@@ -1,15 +1,8 @@
-import { Activity } from 'src/resources/activities/entities/activity.entity';
-import { User } from 'src/resources/users/entities/user.entity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
+@Unique(['name', 'userId'])
 export class Exercise {
   @PrimaryGeneratedColumn()
   id: number;
@@ -17,10 +10,11 @@ export class Exercise {
   @Column()
   name: string;
 
-  @ManyToOne(() => User, (user) => user.exercises)
-  user: User;
+  @Column()
+  userId: number;
 
-  @ManyToMany(() => Activity)
-  @JoinTable()
-  activity: Activity[];
+  @ManyToOne(() => User, (user) => user.exercises, {
+    onDelete: 'CASCADE',
+  })
+  user: User;
 }
