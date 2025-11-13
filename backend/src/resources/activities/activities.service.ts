@@ -62,6 +62,12 @@ export class ActivitiesService {
       throw new NotFoundException('Activity not found');
     }
 
+    const existExerciseId = await this.exerciseRepository.findOneBy({ id: updateActivityDto.exerciseId });
+
+    if (!existExerciseId) {
+      throw new NotFoundException('This exerciseId dont exist');
+    }
+
     if (updateActivityDto.sets) {
       activity.sets = updateActivityDto.sets;
     }
@@ -72,6 +78,14 @@ export class ActivitiesService {
 
     if (updateActivityDto.weight) {
       activity.weight = updateActivityDto.weight;
+    }
+
+    if (updateActivityDto.results) {
+      activity.results = updateActivityDto.results;
+    }
+
+    if (updateActivityDto.exerciseId) {
+      activity.exerciseId = updateActivityDto.exerciseId;
     }
 
     return this.activityRepository.save(activity);

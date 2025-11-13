@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { OmitType, PartialType } from '@nestjs/mapped-types';
 import { CreateWorkoutDto } from './create-workout.dto';
 
-export class UpdateWorkoutDto extends PartialType(CreateWorkoutDto) {}
+export class UpdateWorkoutDto extends PartialType(OmitType(CreateWorkoutDto, ['trainingPlanId'] as const)) {}
