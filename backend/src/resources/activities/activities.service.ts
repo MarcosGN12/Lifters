@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,16 +19,6 @@ export class ActivitiesService {
   ) {}
 
   async create(createActivityDto: CreateActivityDto): Promise<Activity> {
-    const activity = this.createActivity(createActivityDto);
-
-    if (!activity.workoutId) {
-      throw new BadRequestException('There is not any workout assigned to this activity');
-    }
-
-    if (!activity.exerciseId) {
-      throw new BadRequestException('There is not any exercise assigned to this activity');
-    }
-
     const existExerciseId = await this.exerciseRepository.findOneBy({ id: createActivityDto.exerciseId });
 
     if (!existExerciseId) {
@@ -40,6 +30,8 @@ export class ActivitiesService {
     if (!existWorkoutId) {
       throw new NotFoundException('This workoutId dont exist');
     }
+
+    const activity = this.createActivity(createActivityDto);
     return await this.activityRepository.save(activity);
   }
 

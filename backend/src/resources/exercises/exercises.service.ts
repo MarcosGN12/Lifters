@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { UpdateExerciseDto } from './dto/update-exercise.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -22,17 +22,13 @@ export class ExercisesService {
       throw new ConflictException('This exercise is already created for this user');
     }
 
-    const exercise = this.createExercise(createExerciseDto);
-
-    if (!exercise.userId) {
-      throw new BadRequestException('There is not any user assigned to this exercise');
-    }
-
     const existUserId = await this.userRepository.findOneBy({ id: createExerciseDto.userId });
 
     if (!existUserId) {
       throw new NotFoundException('This userId dont exist');
     }
+
+    const exercise = this.createExercise(createExerciseDto);
 
     return await this.exerciseRepository.save(exercise);
   }
