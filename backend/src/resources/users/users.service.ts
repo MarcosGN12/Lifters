@@ -41,6 +41,15 @@ export class UsersService {
     return user;
   }
 
+  async findOneUserByEmail(email: string): Promise<User | undefined> {
+    const user = await this.userRepository.findOneBy({ email });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    return user;
+  }
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findOneBy({ id });
 
@@ -56,6 +65,14 @@ export class UsersService {
 
     if (updateUserDto.email) {
       user.email = updateUserDto.email;
+    }
+
+    if (updateUserDto.username) {
+      user.username = updateUserDto.username;
+    }
+
+    if (updateUserDto.password) {
+      user.password = updateUserDto.password;
     }
 
     return this.userRepository.save(user);
@@ -74,6 +91,8 @@ export class UsersService {
   private createUserEntity(createUserDto: CreateUserDto): User {
     const user = new User();
     user.email = createUserDto.email;
+    user.username = createUserDto.username;
+    user.password = createUserDto.password;
 
     return user;
   }

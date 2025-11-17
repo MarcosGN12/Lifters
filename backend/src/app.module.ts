@@ -12,10 +12,12 @@ import { Workout } from './resources/workouts/entities/workout.entity';
 import { TrainingPlan } from './resources/training-plans/entities/training-plan.entity';
 import { Activity } from './resources/activities/entities/activity.entity';
 import { Exercise } from './resources/exercises/entities/exercise.entity';
+import { AuthModule } from './resources/auth/auth.module';
 
 @Module({
   imports: [
     UsersModule,
+    AuthModule,
     TrainingPlanModule,
     WorkoutsModule,
     ActivitiesModule,

@@ -10,6 +10,12 @@ export class User {
   @Column({ unique: true })
   email: string;
 
+  @Column()
+  username: string;
+
+  @Column()
+  password: string;
+
   @OneToMany(() => TrainingPlan, (trainingPlan) => trainingPlan.user)
   trainingPlans: TrainingPlan[];
 
