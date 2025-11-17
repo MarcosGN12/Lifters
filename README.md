@@ -42,4 +42,35 @@ Usando este patron podremos acceder y manejar mejor la información de la base d
 
 ### Autenticacion JWT
 
-Cuando nos creemos un usuario con su contraseña, se va a generar un JWT (json web token) con este token vamos a poder iniciar sesion y acceder a ciertas rutas protegidas seleccionadas por el creador de la aplicacion web
+#### JWT
+
+Es un estandar para poder propagar informacion entre dos parte de forma segura la identidad de un usuario, el usuario tendra unos privilegios que estaran dentro del payload o cuerpo de un mensaje firmado digitalmente.
+
+En la practica es una cadena de texto que tiene 3 partes codificadas en base64 y cada una de ellas esta separada por un punto.
+
+#### Estructura
+
+- Header
+
+  - Es el encabezado donde se indica el algoritmo y tipo de token.
+
+- Payload
+
+  - Donde aparecen los datos de usuario y privilegios y la demas informacion que queramos añadir y estara todo codificado en JSON.
+
+- Signature
+
+  - Firma que nos permite verificar si el token es válido, mediante combinacion de la carga util que se ha codificado en base64 + la clave secreta. Y esto se usa para verificar que el token no ha sido alterado durante su transferencia.
+
+#### Como se crea
+
+La creacion del JWT es a partir de generar un encabezado y un payload ambos en formato JSON, luego se codifican en base64 y los combinaremos con una firma creada a partir de la clave secreta y el algoritmo especificado.
+
+#### Ciclo de vida
+
+1 Usamos la ruta POST /login con su usuario y contraseña
+2 Se crea el token JWT con el secreto
+3 Se devuelve el JWT
+4 Se envia el JWT en el encabezado Authorization: Bearer
+5 Se comprueba la firma del token. Se obtiene el recursos
+6 Se responde con el recurso protegido
