@@ -12,7 +12,7 @@ Los recursos que son elementos que nos interesan ya que podemos identificarlos y
 
 - Create: verbo POST, lo utilizaremos para crear recursos en la base de datos.
 
-- Read: verbo GET, lo utilizaremos por consultar recursos en la base de datos. 
+- Read: verbo GET, lo utilizaremos por consultar recursos en la base de datos.
 
 - Update: verbo PUT o PATCH, lo utilizaremos para actualizar recursos en la base de datos.
 
@@ -40,3 +40,6 @@ El patron repositorio actua como un intermediario entre la capa de negocio de un
 
 Usando este patron podremos acceder y manejar mejor la información de la base de datos y tendremos los conceptos mas separados y limpios, haciendo que el código sea mas facil de mantener, testear y adaptarlo a cambios en la base de datos.
 
+### Autenticacion JWT
+
+Cuando nos creemos un usuario con su contraseña, se va a generar un JWT (json web token) con este token vamos a poder iniciar sesion y acceder a ciertas rutas protegidas seleccionadas por el creador de la aplicacion web
