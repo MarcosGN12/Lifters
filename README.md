@@ -56,20 +56,14 @@ En la practica es una cadena de texto que tiene 3 partes codificadas en base64 y
 
 - Payload
 
-  - Donde aparecen los datos de usuario y privilegios y la demas informacion que queramos añadir y estara todo serializado en JSON para luego codificarse en base64.
+  - Donde aparecen los datos de usuario, privilegios y el resto informacion que queramos añadir. Estara todo serializado en JSON.
 
 - Signature
 
-  - Firma que nos permite verificar si el token es válido, mediante combinacion de header y payload que se ha codificado en base64 + la clave secreta. Y esto se usa para verificar que el token no ha sido alterado durante su transferencia.
-
-#### Como se crea
-
-La creacion del JWT es a partir de generar un encabezado y un payload ambos en formato JSON, luego se codifican en base64 y los combinaremos con una firma creada a partir de la clave secreta y el algoritmo especificado y este constara de las 3 partes mencionadas previamente que son:
-
-- header
-- payload
-- signature
+  - Firma que nos permite verificar si el token es válido. Esto se usa para verificar que el token no ha sido alterado durante su transferencia.
 
 #### Ciclo de vida diagrama
 
 ![alt text](image.png)
+
+##### Hash

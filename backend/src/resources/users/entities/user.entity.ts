@@ -11,10 +11,7 @@ export class User {
   email: string;
 
   @Column()
-  username: string;
-
-  @Column()
-  password: string;
+  passwordHash: string;
 
   @OneToMany(() => TrainingPlan, (trainingPlan) => trainingPlan.user)
   trainingPlans: TrainingPlan[];

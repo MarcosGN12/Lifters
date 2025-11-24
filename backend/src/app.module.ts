@@ -13,9 +13,14 @@ import { TrainingPlan } from './resources/training-plans/entities/training-plan.
 import { Activity } from './resources/activities/entities/activity.entity';
 import { Exercise } from './resources/exercises/entities/exercise.entity';
 import { AuthModule } from './resources/auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.develop.env',
+    }),
     UsersModule,
     AuthModule,
     TrainingPlanModule,

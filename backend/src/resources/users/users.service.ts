@@ -4,6 +4,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { encodePassword } from '../utils/bcrypt';
+import { FilterUserDto } from './dto/filter-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +18,7 @@ export class UsersService {
       throw new ConflictException('This email has been already registered');
     }
 
-    const user = this.createUserEntity(createUserDto);
+    const user = await this.createUserEntity(createUserDto);
 
     return await this.userRepository.save(user);
   }
@@ -41,8 +43,8 @@ export class UsersService {
     return user;
   }
 
-  async findOneUserByEmail(email: string): Promise<User | undefined> {
-    const user = await this.userRepository.findOneBy({ email });
+  async findUser(filterUserDto: FilterUserDto): Promise<User | null> {
+    const user = await this.userRepository.findOneBy(filterUserDto);
 
     if (!user) {
       throw new NotFoundException('User not found');
@@ -50,6 +52,7 @@ export class UsersService {
 
     return user;
   }
+
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findOneBy({ id });
 
@@ -67,12 +70,8 @@ export class UsersService {
       user.email = updateUserDto.email;
     }
 
-    if (updateUserDto.username) {
-      user.username = updateUserDto.username;
-    }
-
-    if (updateUserDto.password) {
-      user.password = updateUserDto.password;
+    if (updateUserDto.passwordHash) {
+      user.passwordHash = updateUserDto.passwordHash;
     }
 
     return this.userRepository.save(user);
@@ -88,11 +87,12 @@ export class UsersService {
     return this.userRepository.remove(user);
   }
 
-  private createUserEntity(createUserDto: CreateUserDto): User {
+  private async createUserEntity(createUserDto: CreateUserDto): Promise<User> {
+    const password = await encodePassword(createUserDto.passwordHash);
     const user = new User();
+
     user.email = createUserDto.email;
-    user.username = createUserDto.username;
-    user.password = createUserDto.password;
+    user.passwordHash = password;
 
     return user;
   }

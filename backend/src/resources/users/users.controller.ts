@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Public } from '../auth/auth.guard';
 
 @Controller('users')
 @ApiTags('Users')
@@ -34,6 +35,7 @@ export class UsersController {
     status: 409,
     description: 'This email has been already registered',
   })
+  @Public()
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.create(createUserDto);
   }
@@ -50,6 +52,7 @@ export class UsersController {
     status: 404,
     description: 'Not users found',
   })
+  @Public()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
@@ -66,6 +69,7 @@ export class UsersController {
     status: 404,
     description: 'Failed to get user information',
   })
+  @Public()
   findOne(@Param('id') id: string): Promise<User | null> {
     return this.usersService.findOne(+id);
   }
