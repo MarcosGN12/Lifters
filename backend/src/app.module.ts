@@ -14,12 +14,14 @@ import { Activity } from './resources/activities/entities/activity.entity';
 import { Exercise } from './resources/exercises/entities/exercise.entity';
 import { AuthModule } from './resources/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import configurationApp from '../config/configuration-app';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: `env/.${process.env.NODE_ENV}.env`,
+      load: [configurationApp],
       isGlobal: true,
-      envFilePath: '.develop.env',
     }),
     UsersModule,
     AuthModule,

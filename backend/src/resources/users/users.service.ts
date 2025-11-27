@@ -30,6 +30,8 @@ export class UsersService {
       throw new NotFoundException('Users not found');
     }
 
+    users.forEach((user) => delete user.passwordHash);
+
     return users;
   }
 
@@ -40,6 +42,7 @@ export class UsersService {
       throw new NotFoundException('User not found');
     }
 
+    delete user.passwordHash;
     return user;
   }
 
@@ -50,6 +53,7 @@ export class UsersService {
       throw new NotFoundException('User not found');
     }
 
+    delete user.passwordHash;
     return user;
   }
 
@@ -71,7 +75,7 @@ export class UsersService {
     }
 
     if (updateUserDto.passwordHash) {
-      user.passwordHash = updateUserDto.passwordHash;
+      user.passwordHash = await encodePassword(updateUserDto.passwordHash);
     }
 
     return this.userRepository.save(user);
@@ -88,11 +92,10 @@ export class UsersService {
   }
 
   private async createUserEntity(createUserDto: CreateUserDto): Promise<User> {
-    const password = await encodePassword(createUserDto.passwordHash);
     const user = new User();
 
     user.email = createUserDto.email;
-    user.passwordHash = password;
+    user.passwordHash = await encodePassword(createUserDto.passwordHash);
 
     return user;
   }

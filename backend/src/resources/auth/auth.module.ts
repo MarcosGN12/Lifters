@@ -5,21 +5,16 @@ import { UsersModule } from '../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule,
     UsersModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('SECRET'),
-        signOptions: { expiresIn: '60s' },
-      }),
-      inject: [ConfigService],
+    JwtModule.register({
+      secret: process.env.JWT_SECRET || 'undefinedSecret',
+      signOptions: { expiresIn: '60s' },
     }),
   ],
+
   providers: [AuthService, { provide: APP_GUARD, useClass: AuthGuard }],
   controllers: [AuthController],
   exports: [AuthService],
