@@ -30,30 +30,16 @@ export class UsersService {
       throw new NotFoundException('Users not found');
     }
 
-    users.forEach((user) => delete user.passwordHash);
-
     return users;
   }
 
-  async findOne(id: number): Promise<User | null> {
-    const user = await this.userRepository.findOneBy({ id });
-
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
-    delete user.passwordHash;
-    return user;
-  }
-
-  async findUser(filterUserDto: FilterUserDto): Promise<User | null> {
+  async findUser(filterUserDto: FilterUserDto): Promise<User> {
     const user = await this.userRepository.findOneBy(filterUserDto);
 
     if (!user) {
       throw new NotFoundException('User not found');
     }
 
-    delete user.passwordHash;
     return user;
   }
 
@@ -74,8 +60,8 @@ export class UsersService {
       user.email = updateUserDto.email;
     }
 
-    if (updateUserDto.passwordHash) {
-      user.passwordHash = await encodePassword(updateUserDto.passwordHash);
+    if (updateUserDto.password) {
+      user.password = await encodePassword(updateUserDto.password);
     }
 
     return this.userRepository.save(user);
@@ -95,7 +81,7 @@ export class UsersService {
     const user = new User();
 
     user.email = createUserDto.email;
-    user.passwordHash = await encodePassword(createUserDto.passwordHash);
+    user.password = await encodePassword(createUserDto.password);
 
     return user;
   }
