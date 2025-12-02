@@ -4,6 +4,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { encodePassword } from '../utils/bcrypt';
+import { FilterUserDto } from './dto/filter-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +18,7 @@ export class UsersService {
       throw new ConflictException('This email has been already registered');
     }
 
-    const user = this.createUserEntity(createUserDto);
+    const user = await this.createUserEntity(createUserDto);
 
     return await this.userRepository.save(user);
   }
@@ -31,8 +33,8 @@ export class UsersService {
     return users;
   }
 
-  async findOne(id: number): Promise<User | null> {
-    const user = await this.userRepository.findOneBy({ id });
+  async findUser(filterUserDto: FilterUserDto): Promise<User> {
+    const user = await this.userRepository.findOneBy(filterUserDto);
 
     if (!user) {
       throw new NotFoundException('User not found');
@@ -58,6 +60,10 @@ export class UsersService {
       user.email = updateUserDto.email;
     }
 
+    if (updateUserDto.password) {
+      user.password = await encodePassword(updateUserDto.password);
+    }
+
     return this.userRepository.save(user);
   }
 
@@ -71,9 +77,11 @@ export class UsersService {
     return this.userRepository.remove(user);
   }
 
-  private createUserEntity(createUserDto: CreateUserDto): User {
+  private async createUserEntity(createUserDto: CreateUserDto): Promise<User> {
     const user = new User();
+
     user.email = createUserDto.email;
+    user.password = await encodePassword(createUserDto.password);
 
     return user;
   }

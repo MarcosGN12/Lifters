@@ -50,8 +50,10 @@ export class UsersController {
     status: 404,
     description: 'Not users found',
   })
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  async findAll(): Promise<User[]> {
+    const users = await this.usersService.findAll();
+    users.forEach((user) => delete user.password);
+    return users;
   }
 
   @Get(':id')
@@ -66,8 +68,11 @@ export class UsersController {
     status: 404,
     description: 'Failed to get user information',
   })
-  findOne(@Param('id') id: string): Promise<User | null> {
-    return this.usersService.findOne(+id);
+  async findOne(@Param('id') id: string): Promise<User> {
+    const user = await this.usersService.findUser({ id: +id });
+    delete user.password;
+
+    return user;
   }
 
   @Patch(':id')
