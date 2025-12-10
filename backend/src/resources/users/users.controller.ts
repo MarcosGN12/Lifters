@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Public } from '../auth/auth.guard';
 
 @Controller('users')
 @ApiTags('Users')
@@ -12,6 +13,7 @@ export class UsersController {
 
   // vaciar los parametros de los metodos y meterlos en objetos externos en una carpeta swagger
   @Post()
+  @Public()
   @ApiOperation({
     description: 'Create an user',
   })
