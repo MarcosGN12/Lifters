@@ -13,11 +13,14 @@ describe("users", () => {
   describe("POST", () => {
     it("should return 201 CREATED if a valid DTO is provided", async () => {
       const newUser = {
-        email: "marcosnuero61@gmail.com",
+        email: "marcosnuero66@gmail.com",
         password: "1234",
       };
       const res = await request(API_BASE_URL).post("/users").send(newUser);
       expect(res.statusCode).toBe(201);
+      expect(res.body).toHaveProperty("id");
+      expect(res.body).toHaveProperty("email");
+      expect(res.body).toHaveProperty("password");
     });
 
     // CORRECTO
@@ -46,6 +49,8 @@ describe("users", () => {
         .get("/users/27")
         .set("Authorization", `Bearer ${token}`);
       expect(res.statusCode).toBe(200);
+      expect(res.body).toHaveProperty("id");
+      expect(res.body).toHaveProperty("email");
     });
 
     // CORRECTO
@@ -62,7 +67,7 @@ describe("users", () => {
     // CAMBIAR SIEMPRE EL EMAIL YA QUE SIEMPRE QUE SE EJECUTE EL CODIGO A LA SIGUIENTE PRUEBA VA A FALLAR PORQUE YA SE CAMBIO PREVIAMENTE
     it("should return 200 if user was updated", async () => {
       const updatedUser = {
-        email: "marcosnuero62@gmail.com",
+        email: "marcosnuero69@gmail.com",
         password: "1234",
       };
 
@@ -71,6 +76,8 @@ describe("users", () => {
         .send(updatedUser)
         .set("Authorization", `Bearer ${token}`);
       expect(res.statusCode).toBe(200);
+      expect(res.body).toHaveProperty("email");
+      expect(res.body).toHaveProperty("password");
     });
 
     it("should return 404 if user id is not related with a user for update", async () => {

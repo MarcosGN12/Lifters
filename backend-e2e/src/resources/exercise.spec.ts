@@ -21,6 +21,9 @@ describe("exercise", () => {
         .send(newExercise)
         .set("Authorization", `Bearer ${token}`);
       expect(res.statusCode).toBe(201);
+      expect(res.body).toHaveProperty("id");
+      expect(res.body).toHaveProperty("name");
+      expect(res.body).toHaveProperty("userId");
     });
 
     // CORRECTO
@@ -34,6 +37,19 @@ describe("exercise", () => {
         .send(newExercise)
         .set("Authorization", `Bearer ${token}`);
       expect(res.statusCode).toBe(409);
+    });
+
+    // CORRECTO
+    it("should return 404 if a user id provided not exist", async () => {
+      const newExercise = {
+        name: "curl de araña",
+        userId: 100,
+      };
+      const res = await request(API_BASE_URL)
+        .post("/exercises")
+        .send(newExercise)
+        .set("Authorization", `Bearer ${token}`);
+      expect(res.statusCode).toBe(404);
     });
   });
 
@@ -52,6 +68,9 @@ describe("exercise", () => {
         .get("/exercises/1")
         .set("Authorization", `Bearer ${token}`);
       expect(res.statusCode).toBe(200);
+      expect(res.body).toHaveProperty("id");
+      expect(res.body).toHaveProperty("name");
+      expect(res.body).toHaveProperty("userId");
     });
 
     // CORRECTO
@@ -76,6 +95,7 @@ describe("exercise", () => {
         .send(updatedExercise)
         .set("Authorization", `Bearer ${token}`);
       expect(res.statusCode).toBe(200);
+      expect(res.body).toHaveProperty("name");
     });
 
     // CORRECTO
