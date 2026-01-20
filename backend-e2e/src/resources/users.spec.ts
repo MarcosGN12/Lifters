@@ -8,25 +8,38 @@ describe("users", () => {
     token = await getAuthToken();
   });
 
-  // CORRECTO
-  // CAMBIAR EL EMAIL CUANDO SE HAGA LA PRUEBA DEFINITIVA YA QUE SE ESTA CREANDO Y SALDRA ERROR POR DUPLICADO
   describe("POST", () => {
+    // CORRECTO
     it("should return 201 CREATED if a valid DTO is provided", async () => {
       const newUser = {
-        email: "marcosnuero66@gmail.com",
+        email: "marcosnuero12@gmail.com",
         password: "1234",
       };
+
       const res = await request(API_BASE_URL).post("/users").send(newUser);
+      const id = res.body.id;
+
       expect(res.statusCode).toBe(201);
+
       expect(res.body).toHaveProperty("id");
       expect(res.body).toHaveProperty("email");
       expect(res.body).toHaveProperty("password");
+
+      const loginRes = await request(API_BASE_URL)
+        .post("/auth/login")
+        .send(newUser);
+
+      const accessToken = loginRes.body.accessToken;
+
+      await request(API_BASE_URL)
+        .delete(`/users/${id}`)
+        .set("Authorization", `Bearer ${accessToken}`);
     });
 
     // CORRECTO
-    it("should return 409 if a user already created is provided", async () => {
+    it("should freturn 409 if a user already created is provided", async () => {
       const newUser = {
-        email: "marcosnuero11@gmail.com",
+        email: "marcosnuero1@gmail.com",
         password: "1234",
       };
       const res = await request(API_BASE_URL).post("/users").send(newUser);
@@ -35,15 +48,13 @@ describe("users", () => {
   });
 
   describe("GET", () => {
-    // CORRECTO
     it("should return 404 NOT FOUND if user id is not related with a user", async () => {
       const res = await request(API_BASE_URL)
-        .get("/users/100")
+        .get("/users/1000")
         .set("Authorization", `Bearer ${token}`);
       expect(res.statusCode).toBe(404);
     });
 
-    // CORRECTO
     it("should return 200 if user was found", async () => {
       const res = await request(API_BASE_URL)
         .get("/users/27")
@@ -63,7 +74,6 @@ describe("users", () => {
   });
 
   describe("PUT", () => {
-    //CORRECTO
     // CAMBIAR SIEMPRE EL EMAIL YA QUE SIEMPRE QUE SE EJECUTE EL CODIGO A LA SIGUIENTE PRUEBA VA A FALLAR PORQUE YA SE CAMBIO PREVIAMENTE
     it("should return 200 if user was updated", async () => {
       const updatedUser = {
@@ -81,19 +91,19 @@ describe("users", () => {
     });
 
     it("should return 404 if user id is not related with a user for update", async () => {
+      // CORRECTO
       const updatedUser = {
         email: "marcosnuero11@gmail.com",
         password: "1234",
       };
       const res = await request(API_BASE_URL)
-        .patch("/users/50")
+        .patch("/users/1000")
         .send(updatedUser)
         .set("Authorization", `Bearer ${token}`);
       expect(res.statusCode).toBe(404);
     });
   });
 
-  // CORRECTO
   // CAMBIAR SIEMPRE EL ID PORQUE DESPUES DE HACER UNA PRUEBA VA A FALLAR YA QUE YA FUE BORRADO
   describe("DELETE", () => {
     it("should return 200 if user was deleted", async () => {
@@ -106,7 +116,7 @@ describe("users", () => {
     // CORRECTO
     it("should return 404 if user id is not related with a user for delete", async () => {
       const res = await request(API_BASE_URL)
-        .delete("/users/50")
+        .delete("/users/1000")
         .set("Authorization", `Bearer ${token}`);
       expect(res.statusCode).toBe(404);
     });
