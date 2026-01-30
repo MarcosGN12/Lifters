@@ -1,0 +1,70 @@
+{
+  "hash": "4e111697",
+  "configHash": "4d2d3180",
+  "lockfileHash": "78c58c5b",
+  "browserHash": "2774ec09",
+  "optimized": {
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "030e6ad9",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "8fd157c3",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "b4a48654",
+      "needsInterop": false
+    },
+    "@angular/forms/signals": {
+      "src": "../../../../../../node_modules/@angular/forms/fesm2022/signals.mjs",
+      "file": "@angular_forms_signals.js",
+      "fileHash": "2079e842",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "037cbda2",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "2bcfdcea",
+      "needsInterop": false
+    },
+    "lucide-angular": {
+      "src": "../../../../../../node_modules/lucide-angular/fesm2020/lucide-angular.mjs",
+      "file": "lucide-angular.js",
+      "fileHash": "221df71b",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-JO4FBGN3": {
+      "file": "chunk-JO4FBGN3.js"
+    },
+    "chunk-3XKPPK4O": {
+      "file": "chunk-3XKPPK4O.js"
+    },
+    "chunk-NECFLRHM": {
+      "file": "chunk-NECFLRHM.js"
+    },
+    "chunk-7PWTUNCI": {
+      "file": "chunk-7PWTUNCI.js"
+    },
+    "chunk-BTAWC7JV": {
+      "file": "chunk-BTAWC7JV.js"
+    },
+    "chunk-VRAJM4OB": {
+      "file": "chunk-VRAJM4OB.js"
+    }
+  }
+}
