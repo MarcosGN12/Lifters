@@ -2,14 +2,12 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-    private configService: ConfigService,
   ) {}
 
   async signIn(email: string, pass: string): Promise<{ accessToken: string }> {
@@ -33,5 +31,9 @@ export class AuthService {
     return {
       accessToken: await this.jwtService.signAsync(payload),
     };
+  }
+
+  getAuthToken(): string | null {
+    return localStorage.getItem('access_token');
   }
 }
