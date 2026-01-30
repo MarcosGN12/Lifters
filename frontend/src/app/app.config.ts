@@ -1,11 +1,55 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  importProvidersFrom,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
+import {
+  LucideAngularModule,
+  File,
+  House,
+  Menu,
+  UserCheck,
+  Eye,
+  FileIcon,
+  Lock,
+  User,
+  UserLock,
+  Dumbbell,
+  Bell,
+  Plus,
+  ListFilter,
+  Trash2,
+  Pen,
+} from 'lucide-angular';
 
 import { routes } from './app.routes';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { loggingInterceptor } from './interceptor/logging-interceptor/logging-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
-  ]
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([loggingInterceptor])),
+    importProvidersFrom(
+      LucideAngularModule.pick({
+        File,
+        House,
+        Menu,
+        UserCheck,
+        Eye,
+        FileIcon,
+        Lock,
+        User,
+        UserLock,
+        Dumbbell,
+        Bell,
+        Plus,
+        ListFilter,
+        Trash2,
+        Pen,
+      }),
+    ),
+  ],
 };

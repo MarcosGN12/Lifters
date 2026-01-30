@@ -1,0 +1,100 @@
+<section>
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 m-10">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>EXERCISE NAME</th>
+                    <th>CATEGORY</th>
+                    <th>DIFFICULTY</th>
+                    <th>INTENSITY</th>
+                    <th class="text-center">LAST UPDATED</th>
+                    <th class="text-center">ACTIONS</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>Push-ups</th>
+                    <td><lifters-badge classBadge="badge badge-soft badge-info" textBadge="STRENGTH"></lifters-badge></td>
+                    <td><lifters-badge classBadge="badge badge-soft badge-info" textBadge="EASY"></lifters-badge></td>
+                    <td class="text-center">
+                        <progress-bar classProgress="progress progress-info mr-6" [valueProgress]="40" [maxProgress]="100" textProgress="4/10"></progress-bar>
+                    </td>
+                    <td class="text-center">Oct 12, 2023</td>
+                    <td class="text-center">
+                        <div class="flex items-center justify-center gap-2 h-full w-full">
+                            <lifters-icon nameIcon="Pen" classIcon="w-5 h-5 cursor-pointer" [sizeIcon]="20"></lifters-icon>
+                            <lifters-icon  nameIcon="Trash2" classIcon="w-5 h-5 cursor-pointer" [sizeIcon]="20"></lifters-icon>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Pull-ups</th>
+                    <td><lifters-badge classBadge="badge badge-soft badge-info" textBadge="STRENGTH"></lifters-badge></td>
+                    <td><lifters-badge classBadge="badge badge-soft badge-warning" textBadge="MEDIUM"></lifters-badge></td>
+                    <td class="text-center">
+                        <progress-bar classProgress="progress progress-warning mr-6" [valueProgress]="70" [maxProgress]="100" textProgress="7/10"></progress-bar>
+                    </td>
+                    <td class="text-center">Oct 12, 2023</td>
+                    <td class="text-center">
+                        <div class="flex items-center justify-center gap-2 h-full w-full">
+                            <lifters-icon  nameIcon="Pen" classIcon="w-5 h-5 cursor-pointer" [sizeIcon]="20"></lifters-icon>
+                            <lifters-icon  nameIcon="Trash2" classIcon="w-5 h-5 cursor-pointer" [sizeIcon]="20"></lifters-icon>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Pine-push-ups</th>
+                    <td><lifters-badge classBadge="badge badge-soft badge-info" textBadge="STRENGTH"></lifters-badge></td>
+                    <td><lifters-badge classBadge="badge badge-soft badge-error" textBadge="ADVANCED"></lifters-badge></td>
+                    <td class="text-center">
+                        <progress-bar classProgress="progress progress-error mr-6" [valueProgress]="90" [maxProgress]="100" textProgress="9/10"></progress-bar>
+                    </td>
+                    <td class="text-center">Oct 12, 2023</td>
+                    <td class="text-center">
+                        <div class="flex items-center justify-center gap-2 h-full w-full">
+                            <lifters-icon  nameIcon="Pen" classIcon="w-5 h-5 cursor-pointer" [sizeIcon]="20"></lifters-icon>
+                            <lifters-icon  nameIcon="Trash2" classIcon="w-5 h-5 cursor-pointer" [sizeIcon]="20"></lifters-icon>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>Push-ups</th>
+                    <td><div class="badge badge-soft badge-info">STRENGTH</div></td>
+                    <td><div class="badge badge-soft badge-warning">MEDIUM</div></td>
+                    <td class="text-center">
+                        <div class="flex items-center justify-center gap-2 h-full w-full">
+                            <progress class="progress progress-info mr-6" value="40" max="100"></progress>6/10
+                        </div>
+                    </td>
+                    <td class="text-center">Oct 12, 2023</td>
+                    <td class="text-center">
+                        <div class="flex items-center justify-center gap-2 h-full w-full">
+                            <lifters-icon  nameIcon="Pen" classIcon="w-5 h-5 cursor-pointer" [sizeIcon]="20"></lifters-icon>
+                            <lifters-icon  nameIcon="Trash2" classIcon="w-5 h-5 cursor-pointer" [sizeIcon]="20"></lifters-icon>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr></tr>
+            </tbody>
+        </table>
+
+        <!-- <section class="flex justify-between p-6">
+            <div>
+                <p>Showing 1 to 4 of 24 exercises </p>
+            </div>
+
+            <div class="flex justify-end join">
+                <button class="join-item btn btn-active">1</button>
+                <button class="join-item btn">2</button>
+                <button class="join-item btn">3</button>
+                <button class="join-item btn">4</button>
+            </div>
+        </section> -->
+    </div>
+</section>

@@ -1,0 +1,32 @@
+<header class="flex justify-between navbar bg-base-100 shadow-sm p-4">
+
+    <section class="flex items-center justify-center w-1/6">
+        <lifters-icon nameIcon="Dumbbell" classIcon="text-amber-300 h-12 w-12 my-icon" [sizeIcon]="50"></lifters-icon>
+        <a class="btn btn-ghost text-xl">Lifters</a>
+    </section>
+
+    <section class="flex gap-2 w-3/4">
+        <input type="text" placeholder="Search" class="input input-bordered w-full m-2" />
+    </section>
+
+    <section class="flex items-center gap-4 w-1/4 justify-center">
+        <button class="btn btn-ghost btn-circle">
+            <lifters-icon nameIcon="Bell" classIcon="my-icon" [sizeIcon]="30"></lifters-icon>
+        </button>
+
+        <a class="btn btn-info text-white"><lifters-icon nameIcon="Plus" classIcon="my-icon" [sizeIcon]="24"></lifters-icon>Add New Exercise</a>
+
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <lifters-icon nameIcon="User" classIcon="btn btn-ghost btn-circle avatar" [sizeIcon]="2022"></lifters-icon>
+
+            </div>
+
+            <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                <li><a class="justify-between">Profile<span class="badge">New</span></a></li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+        </div>
+    </section>
+    </header>
