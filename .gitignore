@@ -58,6 +58,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # Angular frontend
 /frontend/dist/
 /frontend/node_modules/
+/frontend/.angular/
 
 # NestJS backend
 /backend/dist/
