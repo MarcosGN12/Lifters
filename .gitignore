@@ -1,7 +1,5 @@
 # Compiled output
-/dist
 /node_modules
-/build
 
 # Logs
 logs
@@ -15,10 +13,6 @@ lerna-debug.log*
 # OS generated files
 .DS_Store
 
-# Tests
-/coverage
-/.nyc_output
-
 # IDEs and editors
 /.idea
 .project
@@ -29,31 +23,7 @@ lerna-debug.log*
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-# Environment variables
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
-
-# Temp directories
-.temp
-.tmp
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Node.js diagnostic reports
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+/.vscode
 
 # Angular frontend
 /frontend/dist/
@@ -63,7 +33,8 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # NestJS backend
 /backend/dist/
 /backend/node_modules/
+/backend/env/
 
-# Backend E2E (Cypress/Jest)
+# Backend E2E
 backend-e2e/dist/
 backend-e2e/node_modules/
