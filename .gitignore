@@ -36,5 +36,5 @@ lerna-debug.log*
 /backend/env/
 
 # Backend E2E
-backend-e2e/dist/
-backend-e2e/node_modules/
+/backend-e2e/dist/
+/backend-e2e/node_modules/
