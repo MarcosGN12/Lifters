@@ -1,1 +1,3 @@
- <a [class]="classButton()">{{textButton()}}</a>
+ <a [class]="variant()">
+    <ng-content select="[text]"></ng-content>
+ </a>

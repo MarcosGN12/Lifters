@@ -1,3 +1,3 @@
 <div class="flex items-center justify-center gap-2 h-full w-full">
-    <progress [class]="classProgress()" [value]="valueProgress()" [max]="maxProgress()"></progress>{{ textProgress()}}
+    <progress [class]="classProgress()" [value]="valueProgress()" [max]="maxProgress()"></progress><ng-content select="[text]"></ng-content>
 </div>

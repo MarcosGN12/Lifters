@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { form } from '@angular/forms/signals';
+import { Component, inject } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { LoginComponent } from '../../components/login/login';
+import { LoginComponentForm } from './components/login-component-form/login-component-form';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
-interface LoginData {
+export interface LoginData {
   email: string;
   password: string;
 }
@@ -11,33 +13,16 @@ interface LoginData {
 @Component({
   standalone: true,
   selector: 'login',
-  imports: [LucideAngularModule, LoginComponent],
+  imports: [LucideAngularModule, LoginComponentForm],
   templateUrl: './login.html',
   styleUrl: './login.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
-  loginModel = signal<LoginData>({
-    email: '',
-    password: '',
-  });
+  http = inject(HttpClient);
+  router = inject(Router);
+  authService = inject(AuthService);
 
-  loginForm = form(this.loginModel);
-
-  sendData() {
-    this.loginModel.set({
-      email: '',
-      password: '',
-    });
-  }
-
-  seePassword() {
-    const input = document.getElementById('password') as HTMLInputElement;
-
-    if (input.type === 'password') {
-      input.type = 'text';
-    } else {
-      input.type = 'password';
-    }
+  onLogin(data: any) {
+    this.authService.login(data);
   }
 }

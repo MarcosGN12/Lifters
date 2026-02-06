@@ -8,6 +8,5 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './badge.html',
 })
 export class BadgeComponent {
-  classBadge = input.required<string>();
-  textBadge = input.required<string>();
+  color = input.required<string>();
 }

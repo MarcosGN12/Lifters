@@ -8,6 +8,5 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './button.html',
 })
 export class ButtonComponent {
-  classButton = input.required<string>();
-  textButton = input.required<string>();
+  variant = input.required<string>();
 }

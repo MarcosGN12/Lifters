@@ -11,5 +11,4 @@ export class ProgressBarComponent {
   classProgress = input.required<string>();
   valueProgress = input.required<number>();
   maxProgress = input.required<number>();
-  textProgress = input.required<string>();
 }

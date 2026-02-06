@@ -15,7 +15,7 @@
     <div class="mt-4 space-y-4">
       <form [formGroup]="loginForm">
         <div>
-          <div class="flex flex-col">
+          <div class="flex flex-col pb-4">
             <label class="text-amber-950">Email</label>
             <label class="input validator w-full bg-white">
               <lifters-icon nameIcon="User" classIcon="text-gray-500 my-icon" [sizeIcon]="24" ></lifters-icon>
@@ -29,19 +29,19 @@
             </label>
           </div>
 
-          <div class="flex flex-col">
+          <div class="flex flex-col pb-4">
             <label class="text-black">Password</label>
             <label class="input validator w-full bg-white">
             <lifters-icon nameIcon="Lock" classIcon="text-gray-500 my-icon" [sizeIcon]="24" ></lifters-icon>
             <input
               class="text-black"
               id="password"
-              type="password"
+              type="{{ showPassword ? 'text' : 'password'}}"
               required
               placeholder="Password"
               formControlName="password"
             />
-            <span (click)="seePassword()" class="text-gray-500 my-icon hover:cursor-pointer">
+            <span (click)="togglePasswordVisibility()" class="text-gray-500 my-icon hover:cursor-pointer">
               <lifters-icon nameIcon="Eye" classIcon="text-gray-500 my-icon" [sizeIcon]="24" ></lifters-icon>
             </span>  
             </label>

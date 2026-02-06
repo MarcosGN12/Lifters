@@ -15,10 +15,10 @@
             <tbody>
                 <tr>
                     <th>Push-ups</th>
-                    <td><lifters-badge classBadge="badge badge-soft badge-info" textBadge="STRENGTH"></lifters-badge></td>
-                    <td><lifters-badge classBadge="badge badge-soft badge-info" textBadge="EASY"></lifters-badge></td>
+                    <td><lifters-badge color="badge badge-soft badge-info" mode=""><p text>STRENGHT</p></lifters-badge></td>
+                    <td><lifters-badge color="badge badge-soft badge-info"><p text>EASY</p></lifters-badge></td>
                     <td class="text-center">
-                        <progress-bar classProgress="progress progress-info mr-6" [valueProgress]="40" [maxProgress]="100" textProgress="4/10"></progress-bar>
+                        <progress-bar classProgress="progress progress-info mr-6" [valueProgress]="40" [maxProgress]="100"><p text>4/10</p></progress-bar>
                     </td>
                     <td class="text-center">Oct 12, 2023</td>
                     <td class="text-center">
@@ -31,10 +31,10 @@
 
                 <tr>
                     <th>Pull-ups</th>
-                    <td><lifters-badge classBadge="badge badge-soft badge-info" textBadge="STRENGTH"></lifters-badge></td>
-                    <td><lifters-badge classBadge="badge badge-soft badge-warning" textBadge="MEDIUM"></lifters-badge></td>
+                    <td><lifters-badge color="badge badge-soft badge-info"><p text>STRENGHT</p></lifters-badge></td>
+                    <td><lifters-badge color="badge badge-soft badge-warning"><p text>MEDIUM</p></lifters-badge></td>
                     <td class="text-center">
-                        <progress-bar classProgress="progress progress-warning mr-6" [valueProgress]="70" [maxProgress]="100" textProgress="7/10"></progress-bar>
+                        <progress-bar classProgress="progress progress-warning mr-6" [valueProgress]="70" [maxProgress]="100"><p text>7/10</p></progress-bar>
                     </td>
                     <td class="text-center">Oct 12, 2023</td>
                     <td class="text-center">
@@ -47,10 +47,10 @@
 
                 <tr>
                     <th>Pine-push-ups</th>
-                    <td><lifters-badge classBadge="badge badge-soft badge-info" textBadge="STRENGTH"></lifters-badge></td>
-                    <td><lifters-badge classBadge="badge badge-soft badge-error" textBadge="ADVANCED"></lifters-badge></td>
+                    <td><lifters-badge color="badge badge-soft badge-info"><p text>STRENGHT</p></lifters-badge></td>
+                    <td><lifters-badge color="badge badge-soft badge-error"><p text>ADVANCED</p></lifters-badge></td>
                     <td class="text-center">
-                        <progress-bar classProgress="progress progress-error mr-6" [valueProgress]="90" [maxProgress]="100" textProgress="9/10"></progress-bar>
+                        <progress-bar classProgress="progress progress-error mr-6" [valueProgress]="90" [maxProgress]="100"><p text>9/10</p></progress-bar>
                     </td>
                     <td class="text-center">Oct 12, 2023</td>
                     <td class="text-center">
@@ -61,15 +61,12 @@
                     </td>
                 </tr>
 
-
                 <tr>
                     <th>Push-ups</th>
-                    <td><div class="badge badge-soft badge-info">STRENGTH</div></td>
-                    <td><div class="badge badge-soft badge-warning">MEDIUM</div></td>
+                    <td><lifters-badge color="badge badge-soft badge-info"><p text>STRENGHT</p></lifters-badge></td>
+                    <td><lifters-badge color="badge badge-soft badge-warning"><p text>MEDIUM</p></lifters-badge></td>
                     <td class="text-center">
-                        <div class="flex items-center justify-center gap-2 h-full w-full">
-                            <progress class="progress progress-info mr-6" value="40" max="100"></progress>6/10
-                        </div>
+                        <progress-bar classProgress="progress progress-info mr-6" [valueProgress]="60" [maxProgress]="100"><p text>6/10</p></progress-bar>
                     </td>
                     <td class="text-center">Oct 12, 2023</td>
                     <td class="text-center">

@@ -1,1 +1,3 @@
-<div [class]="classBadge()">{{ textBadge()}}</div>
+<div [class]="color()">
+    <ng-content select="[text]"></ng-content>
+</div>

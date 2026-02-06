@@ -26,12 +26,13 @@ import {
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loggingInterceptor } from './interceptor/logging-interceptor/logging-interceptor';
+import { authInterceptor } from './interceptor/auth-interceptor/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([loggingInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, loggingInterceptor])),
     importProvidersFrom(
       LucideAngularModule.pick({
         File,
