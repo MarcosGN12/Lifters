@@ -1,5 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
+
+type BtnVariant = 'btn-primary' | 'btn-secondary' | 'btn-success' | 'btn-info';
 
 @Component({
   selector: 'lifters-button',
@@ -8,5 +10,7 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './button.html',
 })
 export class ButtonComponent {
-  variant = input.required<string>();
+  variant = input<BtnVariant>();
+
+  class = computed(() => `btn ${this.variant()}`);
 }

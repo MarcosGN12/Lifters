@@ -1,5 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
+
+type ColorProgress = 'progress-info' | 'progress-warning' | 'progress-error';
 
 @Component({
   selector: 'progress-bar',
@@ -8,7 +10,9 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './progress-bar.html',
 })
 export class ProgressBarComponent {
-  classProgress = input.required<string>();
-  valueProgress = input.required<number>();
-  maxProgress = input.required<number>();
+  color = input<ColorProgress>();
+  valueProgress = input<number>();
+  maxProgress = input<number>();
+
+  class = computed(() => `progress ${this.color()}`);
 }

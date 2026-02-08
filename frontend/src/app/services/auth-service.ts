@@ -12,14 +12,12 @@ export interface LoginData {
 })
 export class AuthService {
   http = inject(HttpClient);
-  router = inject(Router);
 
   login(item: LoginData) {
     this.http.post('http://localhost:3000/auth/login', item).subscribe({
       next: (response: any) => {
         if (response.accessToken) {
           localStorage.setItem('access_token', response.accessToken);
-          this.router.navigateByUrl('/');
         } else {
           alert(response.message);
           console.log(response.result);
