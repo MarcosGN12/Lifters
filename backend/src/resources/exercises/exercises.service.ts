@@ -87,6 +87,9 @@ export class ExercisesService {
     const exercise = new Exercise();
     exercise.name = createExerciseDto.name;
     exercise.userId = createExerciseDto.userId;
+    exercise.category = createExerciseDto.category;
+    exercise.difficulty = createExerciseDto.difficulty;
+    exercise.intensity = createExerciseDto.intensity;
 
     return exercise;
   }

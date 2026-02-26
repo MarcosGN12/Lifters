@@ -32,8 +32,4 @@ export class AuthService {
       accessToken: await this.jwtService.signAsync(payload),
     };
   }
-
-  getAuthToken(): string | null {
-    return localStorage.getItem('access_token');
-  }
 }
