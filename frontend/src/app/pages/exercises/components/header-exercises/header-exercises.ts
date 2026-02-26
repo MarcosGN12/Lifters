@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { ButtonComponent } from '../../ui/button/button';
+import { ButtonComponent } from '../../../../components/ui/button/button';
 
 @Component({
   selector: 'header-exercises',

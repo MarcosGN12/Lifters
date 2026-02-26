@@ -21,6 +21,7 @@ import {
   ListFilter,
   Trash2,
   Pen,
+  Lightbulb,
 } from 'lucide-angular';
 
 import { routes } from './app.routes';
@@ -50,6 +51,7 @@ export const appConfig: ApplicationConfig = {
         ListFilter,
         Trash2,
         Pen,
+        Lightbulb,
       }),
     ),
   ],

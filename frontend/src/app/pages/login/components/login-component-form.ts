@@ -1,8 +1,8 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { IconComponent } from '../../../../components/ui/icon/icon';
+import { IconComponent } from '../../../../app/components/ui/icon/icon';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { LoginData } from '../../login';
+import { LoginData } from '../login';
 import { Router, ɵROUTER_PROVIDERS } from '@angular/router';
 
 @Component({

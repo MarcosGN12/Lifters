@@ -1,0 +1,31 @@
+<div class="flex flex-col rounded-2xl w-80 bg-blue-100 m-4">
+    <div class="flex justify-center rounded-t-2xl p-11 shadow-xl shadow-black/10" [ngClass]="bgColor()" >
+        <lifters-icon name="Lightbulb" [size]="40" class="drop-shadow-md"></lifters-icon>
+    </div>
+
+    <div class="flex flex-col p-6 bg-white/90 backdrop-blur-sm rounded-b-2xl shadow-xl shadow-black/10 border border-emerald-50 space-y-6">
+        <div class="flex gap-2">
+            <lifters-badge class="pr-2" color="badge-warning" decoration="badge-soft">12 weeks</lifters-badge>
+            <lifters-badge color="badge-info" decoration="badge-soft">STRENGTH</lifters-badge>
+        </div>
+
+        <div class="space-y-3">
+            <h3 class="text-lg font-bold text-slate-900 leading-tight">
+                Strength Phase
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+                Focus on hypertrophy and maximum force production for the upper body chain.
+            </p>
+        </div>
+
+        <div class="space-y-3">
+            <p class="text-sm text-slate-600 leading-relaxed font-medium">ACTIVE ENROLLMENT</p>
+            <progress-bar class="flex items-center justify-center gap-2 h-full w-full mr-6" color="progress-info" [valueProgress]="70" [maxProgress]="100"></progress-bar>
+        </div>
+
+        <div class="flex justify-around pt-2">
+            <lifters-button class="btn-info"><lifters-icon name="Pen" class="w-5 h-5" [size]="20"></lifters-icon> Edit</lifters-button>
+            <lifters-button class="btn-error"><lifters-icon name="Trash2" class="w-5 h-5" [size]="20"></lifters-icon> Delete</lifters-button>
+        </div>
+    </div>
+</div>

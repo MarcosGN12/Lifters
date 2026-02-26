@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { LoginComponentForm } from './components/login-component-form/login-component-form';
+import { LoginComponentForm } from './components/login-component-form';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service';

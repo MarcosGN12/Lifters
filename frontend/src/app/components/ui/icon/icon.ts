@@ -8,7 +8,7 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './icon.html',
 })
 export class IconComponent {
-  nameIcon = input<string>();
-  classIcon = input<string>();
-  sizeIcon = input<number>();
+  name = input<string>();
+  class = input<string>();
+  size = input<number>();
 }

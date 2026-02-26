@@ -5,7 +5,7 @@
     <header class="flex flex-col items-center">
       <div class="flex flex-col items-center font-bold p-2 ">
         <span class="text-black my-icon">
-           <lifters-icon nameIcon="User" [sizeIcon]="60" classIcon="my-icon"></lifters-icon>
+           <lifters-icon name="User" [size]="60" class="my-icon"></lifters-icon>
         </span>
         <h1 class="mt-4 font-extrabold text-xl text-blue-500">Login</h1>
       </div>
@@ -18,7 +18,7 @@
           <div class="flex flex-col pb-4">
             <label class="text-amber-950">Email</label>
             <label class="input validator w-full bg-white">
-              <lifters-icon nameIcon="User" classIcon="text-gray-500 my-icon" [sizeIcon]="24" ></lifters-icon>
+              <lifters-icon name="User" class="text-gray-500 my-icon" [size]="24" ></lifters-icon>
               <input 
                 class="text-black"
                 type="text"
@@ -32,7 +32,7 @@
           <div class="flex flex-col pb-4">
             <label class="text-black">Password</label>
             <label class="input validator w-full bg-white">
-            <lifters-icon nameIcon="Lock" classIcon="text-gray-500 my-icon" [sizeIcon]="24" ></lifters-icon>
+            <lifters-icon name="Lock" class="text-gray-500 my-icon" [size]="24" ></lifters-icon>
             <input
               class="text-black"
               id="password"
@@ -42,7 +42,7 @@
               formControlName="password"
             />
             <span (click)="togglePasswordVisibility()" class="text-gray-500 my-icon hover:cursor-pointer">
-              <lifters-icon nameIcon="Eye" classIcon="text-gray-500 my-icon" [sizeIcon]="24" ></lifters-icon>
+              <lifters-icon name="Eye" class="text-gray-500 my-icon" [size]="24" ></lifters-icon>
             </span>  
             </label>
           </div>

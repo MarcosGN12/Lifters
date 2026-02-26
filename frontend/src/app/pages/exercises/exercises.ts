@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { ExercisesComponent } from '../../components/exercises/exercises-component';
+import { ExercisesComponent } from './components/exercises-component';
 
 @Component({
   selector: 'exercises',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { IconComponent } from '../../ui/icon/icon';
-import { BadgeComponent } from '../../ui/badge/badge';
-import { ProgressBarComponent } from '../../ui/progress-bar/progress-bar';
+import { IconComponent } from '../../../../components/ui/icon/icon';
+import { BadgeComponent } from '../../../../components/ui/badge/badge';
+import { ProgressBarComponent } from '../../../../components/ui/progress-bar/progress-bar';
 
 @Component({
   selector: 'section-exercises',
