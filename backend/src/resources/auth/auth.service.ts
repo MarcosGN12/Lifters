@@ -10,7 +10,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn(email: string, pass: string): Promise<{ accessToken: string }> {
+  async signIn(email: string, pass: string): Promise<{ accessToken: string; userId: number }> {
     const user = await this.usersService.findUser({ email });
 
     if (!user) {
@@ -30,6 +30,7 @@ export class AuthService {
 
     return {
       accessToken: await this.jwtService.signAsync(payload),
+      userId: user.id,
     };
   }
 }

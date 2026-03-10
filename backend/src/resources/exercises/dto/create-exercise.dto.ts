@@ -21,7 +21,7 @@ export class CreateExerciseDto {
 
   @IsDate()
   @IsNotEmpty()
-  createdData: Date;
+  createdDate: Date;
 
   @IsNumber()
   @IsNotEmpty()
