@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HeaderComponent } from './components/header-training-plans/header.component';
+import { HeaderComponent } from './components/header-training-plans/header-component';
 import { SectionComponent } from './components/section-training-plans/section.component';
 import { FooterComponent } from './components/footer-training-plans/footer.component';
 

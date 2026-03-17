@@ -17,6 +17,7 @@ export class AuthService {
       next: (response: any) => {
         if (response.accessToken) {
           localStorage.setItem('access_token', response.accessToken);
+          localStorage.setItem('userId', response.userId);
         } else {
           alert(response.message);
           console.log(response.result);

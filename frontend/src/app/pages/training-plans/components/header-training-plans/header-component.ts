@@ -2,23 +2,19 @@ import { Component, inject } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { ButtonComponent } from '../../../../components/ui/button/button';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ExercisesService } from '../../../../services/exercise.service';
+import { TrainingPlansService } from '../../../../services/training-plan.service';
 
 @Component({
-  selector: 'header-exercises',
+  selector: 'header-training-plan-component',
   standalone: true,
   imports: [LucideAngularModule, ButtonComponent, ReactiveFormsModule],
-  providers: [ExercisesService],
-  templateUrl: './header-exercises.html',
+  templateUrl: './header.component.html',
 })
-export class HeaderExercise {
+export class HeaderComponent {
   isShow: boolean = true;
 
-  newExerciseForm: FormGroup = new FormGroup({
+  newTrainingPlanForm: FormGroup = new FormGroup({
     name: new FormControl(''),
-    category: new FormControl(''),
-    difficulty: new FormControl('easy'),
-    intensity: new FormControl(1),
     userId: new FormControl(localStorage.getItem('userId')),
   });
 
@@ -26,17 +22,17 @@ export class HeaderExercise {
     this.isShow = !this.isShow;
   }
 
-  exercisesService = inject(ExercisesService);
+  trainingPlanService = inject(TrainingPlansService);
 
   async createNewExercise() {
-    this.exercisesService.postUser(this.newExerciseForm.value).subscribe({
+    this.trainingPlanService.postTrainingPlan(this.newTrainingPlanForm.value).subscribe({
       next: (data) => {
         console.log(data);
-        alert('exercise sucesfully created');
+        alert('trainingPlan sucesfully created');
       },
       error: (e) => {
         console.log(e);
-        alert('error: exercise not created');
+        alert('error: trainingPlan not created');
       },
     });
     this.isShow = !this.isShow;

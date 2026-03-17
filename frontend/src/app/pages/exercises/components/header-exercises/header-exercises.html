@@ -12,7 +12,74 @@
         </div>
 
         <div>
-            <lifters-button class="btn-success">Add new exercise</lifters-button>
+            <lifters-button (click)="toggleDisplay()" class="btn-success">Add new exercise</lifters-button>
+            <div [hidden]="isShow" class="flex">
+                <form [formGroup] = "newExerciseForm">
+                    <div class="flex flex-col pb-4">
+                        <label>Name</label>
+                        <label class="input validator w-full bg-white">
+                        <input
+                            class="text-black"
+                            type="text"
+                            required
+                            placeholder="Exercise name"
+                            formControlName="name"
+                        >
+                        </label>
+                    </div>
+
+                    <div class="flex flex-col pb-4">
+                        <label>Category</label>
+                        <label class="input validator w-full bg-white">
+                        <input
+                            class="text-black"
+                            type="text"
+                            required
+                            placeholder="Category"
+                            formControlName="category"
+                        >
+                        </label>
+                    </div>
+
+                    <div class="flex flex-col pb-4">
+                        <label>Difficulty</label>
+                        <label class="input validator w-full bg-white">
+                        
+                        <select formControlName="difficulty">
+                            <option>easy</option>
+                            <option>medium</option>
+                            <option>hard</option>
+                        </select>
+                        </label>
+                    </div>
+
+                     <div class="flex flex-col pb-4">
+                        <label>Intensity</label>
+                        <label class="input validator w-full bg-white">
+                        
+                        <input
+                            class="text-black"
+                            type="number"
+                            min="1"
+                            max="10"
+                            [defaultValue]="1"
+                            required
+                            placeholder="Intensity"
+                            formControlName="intensity"
+                        >
+                        </label>
+
+                        <input 
+                            type="hidden"
+                            formControlName="userId"
+                        >
+                    </div>
+
+                    <div class="flex flex-col pb-4">
+                        <button (click)="createNewExercise()" class="bg-emerald-400 rounded-2xl p-2 cursor-pointer" type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </section>
