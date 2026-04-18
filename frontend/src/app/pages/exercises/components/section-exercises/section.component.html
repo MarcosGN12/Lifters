@@ -1,0 +1,39 @@
+<section>
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 m-10">
+        <table class="table">
+            <thead>
+                <exercise-thead-container-component/>
+            </thead>
+
+            <tbody class="flex flex-col">
+                <exercise-tbody-container-component
+                    name="Push-up"
+                    category="STRENGHT"
+                    difficulty="EASY"
+                    [currentIntensity]="5"
+                    [maxIntensity]="10"
+                    date="Oct 12, 2023">
+                </exercise-tbody-container-component>
+
+                <exercise-tbody-container-component
+                    name="Sprints"
+                    category="CARDIO"
+                    difficulty="MEDIUM"
+                    [currentIntensity]="6"
+                    [maxIntensity]="10"
+                    date="Oct 12, 2023">
+                </exercise-tbody-container-component>
+
+                <exercise-tbody-container-component
+                    name="Push-up to limit"
+                    category="RESISTANCE"
+                    difficulty="HARD"
+                    [currentIntensity]="9"
+                    [maxIntensity]="10"
+                    date="Oct 12, 2023">
+                </exercise-tbody-container-component>
+
+            </tbody>
+        </table>
+    </div>
+</section>

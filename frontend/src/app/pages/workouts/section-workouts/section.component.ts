@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { ContainerComponent } from './training-plan-container/training-plan-container.component';
+import { ContainerComponent } from './workout-container/workout-container-component.js';
 
 @Component({
-  selector: 'section-training-plan-component',
+  selector: 'section-workout-component',
   standalone: true,
   imports: [LucideAngularModule, ContainerComponent],
   templateUrl: './section.component.html',

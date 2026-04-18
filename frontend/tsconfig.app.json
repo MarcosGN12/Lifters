@@ -8,7 +8,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/pages/workouts/section-training-plans/workout-container/workout-container-component-ts", "src/app/pages/workouts/section-workouts/section.component.ts"],
   "exclude": [
     "src/**/*.spec.ts"
   ]

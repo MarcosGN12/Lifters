@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Main } from './pages/main/main';
-import { Routines } from './pages/routines/routines';
+import { Workouts } from './pages/workouts/workouts';
 import { TrainingPlans } from './pages/training-plans/training-plans';
 import { Exercises } from './pages/exercises/exercises';
 import { Login } from './pages/login/login';
@@ -14,8 +14,8 @@ export const routes: Routes = [
   },
 
   {
-    path: 'routines',
-    component: Routines,
+    path: 'workouts',
+    component: Workouts,
     canActivate: [authGuard],
   },
 

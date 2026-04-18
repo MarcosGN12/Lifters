@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { TrainingPlan } from '../types/trainingPlan.type';
+import { TrainingPlan } from '../types/trainingPlans.type';
 
 @Injectable({
   providedIn: 'root',

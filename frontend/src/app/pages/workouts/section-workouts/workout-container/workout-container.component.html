@@ -4,18 +4,21 @@
     </div>
 
     <div class="flex flex-col p-6 bg-white/90 backdrop-blur-sm rounded-b-2xl shadow-xl shadow-black/10 border border-emerald-50 space-y-6">
-        <div class="flex gap-2">
-            <lifters-badge class="pr-2" color="badge-warning" decoration="badge-soft">{{ weeks() + ' weeks'}}</lifters-badge>
-            <lifters-badge color="badge-info" decoration="badge-soft">{{ category()}}</lifters-badge>
-        </div>
+        <!-- <lifters-badge color="badge-info" decoration="badge-soft">STRENGTH</lifters-badge> -->
+
 
         <div class="space-y-3">
             <h3 class="text-lg font-bold text-slate-900 leading-tight">
-                {{ name()}}
+                {{ name() }}
             </h3>
             <p class="text-sm text-slate-600 leading-relaxed">
-                {{ description()}}
+                {{ description() }}
             </p>
+        </div>
+
+        <div class="space-y-3">
+            <!-- <p class="text-sm text-slate-600 leading-relaxed font-medium">ACTIVE ENROLLMENT</p>
+            <progress-bar class="flex items-center justify-center gap-2 h-full w-full mr-6" color="progress-info" [valueProgress]="70" [maxProgress]="100"></progress-bar> -->
         </div>
 
         <div class="flex justify-around pt-2">

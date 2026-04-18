@@ -12,7 +12,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './training-plan-container.component.html',
 })
 export class ContainerComponent {
-  color = input<string>('green-400');
+  weeks = input.required<string>();
+  category = input.required<string>();
+  name = input.required<string>();
+  description = input.required<string>();
 
+  color = input<string>('green-400');
   bgColor = computed(() => `bg-${this.color()}`);
 }
