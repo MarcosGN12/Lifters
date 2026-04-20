@@ -1,0 +1,66 @@
+<tr class="flex justify-between items-center text-center">
+    <th class="w-30">{{ name() }}</th>
+    <td class="w-30">
+        @if( category() == "STRENGHT"){
+        <lifters-badge class="text-center" color="badge-info" decoration="badge-soft">{{ category() }}</lifters-badge>
+        }
+
+        @else if( category() == "CARDIO"){
+        <lifters-badge class="text-center" color="badge-warning" decoration="badge-soft">{{ category() }}</lifters-badge>
+        }
+
+        @else if( category() == "RESISTANCE"){
+        <lifters-badge class="text-center" color="badge-error" decoration="badge-soft">{{ category() }}</lifters-badge>
+        }
+    </td>
+
+    <td class="w-40">
+        @if( difficulty() == "EASY"){
+            <lifters-badge color="badge-info" decoration="badge-soft">{{ difficulty() }}</lifters-badge>
+        }
+
+        @else if( difficulty() == "MEDIUM"){
+            <lifters-badge color="badge-warning" decoration="badge-soft">{{ difficulty() }}</lifters-badge>
+        }
+
+        @else {
+            <lifters-badge color="badge-error" decoration="badge-soft">{{ difficulty() }}</lifters-badge>
+        }
+    </td>
+    <td class="text-center">
+
+        @if( currentIntensity() <= 5){
+            <progress-bar  
+                color="progress-info" 
+                [valueProgress]="currentIntensity()" 
+                [maxProgress]="maxIntensity()">
+                {{ currentIntensity() }} / {{ maxIntensity() }}
+            </progress-bar>
+        }
+
+        @else if( currentIntensity() <= 8){
+            <progress-bar  
+                color="progress-warning" 
+                [valueProgress]="currentIntensity()" 
+                [maxProgress]="maxIntensity()">
+                {{ currentIntensity() }} / {{ maxIntensity() }}
+            </progress-bar>
+        }
+
+        @else{
+            <progress-bar  
+                color="progress-error" 
+                [valueProgress]="currentIntensity()" 
+                [maxProgress]="maxIntensity()">
+                {{ currentIntensity() }} / {{ maxIntensity() }}
+            </progress-bar>
+        }
+    </td>
+    <td class="text-center">{{ date() }}</td>
+    <td class="text-center">
+        <div class="flex items-center justify-center gap-2 h-full w-full">
+            <lifters-icon name="Pen" class="w-5 h-5 cursor-pointer" [size]="20"></lifters-icon>
+            <lifters-icon  name="Trash2" class="w-5 h-5 cursor-pointer" [size]="20"></lifters-icon>
+        </div>
+    </td>
+</tr>

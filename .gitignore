@@ -1,0 +1,41 @@
+# Compiled output
+/node_modules
+/.vscode
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS generated files
+.DS_Store
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+/.vscode
+
+# Angular frontend
+/frontend/dist/
+/frontend/node_modules/
+/frontend/.angular/
+
+# NestJS backend
+/backend/dist/
+/backend/node_modules/
+/backend/env/
+
+# Backend E2E
+/backend-e2e/dist/
+/backend-e2e/node_modules/

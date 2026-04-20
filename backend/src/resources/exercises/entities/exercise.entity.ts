@@ -11,6 +11,15 @@ export class Exercise {
   name: string;
 
   @Column()
+  category: string;
+
+  @Column()
+  difficulty: string;
+
+  @Column()
+  intensity: number;
+
+  @Column()
   userId: number;
 
   @ManyToOne(() => User, (user) => user.exercises, {

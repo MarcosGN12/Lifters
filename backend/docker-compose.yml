@@ -24,3 +24,4 @@ services:
 
 volumes:
   dev_db_data:
+  test_db_data:

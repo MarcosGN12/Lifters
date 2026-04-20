@@ -13,7 +13,7 @@ import { TrainingPlan } from './resources/training-plans/entities/training-plan.
 import { Activity } from './resources/activities/entities/activity.entity';
 import { Exercise } from './resources/exercises/entities/exercise.entity';
 import { AuthModule } from './resources/auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import configurationApp from '../config/configuration-app';
 
 @Module({
@@ -29,15 +29,19 @@ import configurationApp from '../config/configuration-app';
     WorkoutsModule,
     ActivitiesModule,
     ExercisesModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5439,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'lifters-dev',
-      entities: [User, TrainingPlan, Workout, Activity, Exercise],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: 'localhost',
+        port: Number(configService.get('DB_PORT')),
+        username: 'postgres',
+        password: 'postgres',
+        database: configService.get('DB_NAME'),
+        entities: [User, TrainingPlan, Workout, Activity, Exercise],
+        synchronize: true,
+      }),
+      inject: [ConfigService],
     }),
   ],
   controllers: [AppController],

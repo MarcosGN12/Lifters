@@ -2,17 +2,15 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-    private configService: ConfigService,
   ) {}
 
-  async signIn(email: string, pass: string): Promise<{ accessToken: string }> {
+  async signIn(email: string, pass: string): Promise<{ accessToken: string; userId: number }> {
     const user = await this.usersService.findUser({ email });
 
     if (!user) {
@@ -32,6 +30,7 @@ export class AuthService {
 
     return {
       accessToken: await this.jwtService.signAsync(payload),
+      userId: user.id,
     };
   }
 }

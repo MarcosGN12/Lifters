@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@schematics/angular": "^21.1.0"
+  }
+}
